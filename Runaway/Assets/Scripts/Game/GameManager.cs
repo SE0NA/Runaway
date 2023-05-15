@@ -8,41 +8,63 @@ public class GameManager : MonoBehaviour
     // Info this stage
     int now_level;
     int now_stage;
-    List<Block> blocks = new List<Block>();
+    List<GameObject> blocks = new List<GameObject>();
     enum whyover { dead, restblocks }
 
     // Setting Values
     [SerializeField] List<Transform> trans_cam; // 레벨에 따라 캠 위치가 다름
     [Header("Building")]
-    [SerializeField] List<Object> obj_list_buildings;    // 빌딩 디자인
-    [SerializeField] List<Transform> trans_list_finishbuildings; // 종료 빌딩 위치 - 레벨에 따라 다름
+    [SerializeField] GameObject goalbuilding;
     [SerializeField] List<Object> obj_list_backgroundSettings;   // 레벨에 따른 백그라운드 디자인(조명, 캠 등)
     [Header("Block")]
     [SerializeField] Object obj_block;
-    [SerializeField] List<Transform> trans_list_block;
     [Header("Player")]
     [SerializeField] Object obj_player;
-    [SerializeField] Transform trans_player_start;
 
     // Extern
     Camera cam;
     Player player;
 
+
     void Awake()
     {
-        FileReadForStageSetting();
+        now_level = DataManager.instance.selectedLevel;
+        now_stage = DataManager.instance.selectedStage;
 
-        // 백그라운드, 캠 불러오기
+        cam = FindObjectOfType<Camera>();
 
-
-        // 빌딩, 블럭, 플레이어 생성
-
+        SettingStage();
     }
 
-    void FileReadForStageSetting()
+    void SettingStage()
     {
-        // 파일에서 해당 스크립트의 
+        // 카에라 높이 설정
+        cam.transform.position = trans_cam[now_level - 1].position;
+
+        // 블럭 크기 및 종료 빌딩 위치 설정
+        int row = 0, col = 0;
+        if (now_level == 1) { row = 3; col = 3; goalbuilding.transform.position = new Vector3(0, -2f, 18.2f); }
+        else if (now_level == 2) { row = 4; col = 3; goalbuilding.transform.position = new Vector3(0, -2f, 20.7f); }
+        else if (now_level == 3) { row = 5; col = 3; goalbuilding.transform.position = new Vector3(0, -2f, 23.2f); }
+
+        // 블럭 설치
+        int[] blockdesign = DataManager.instance.stagedata.levellist[now_level - 1].stagelist[now_stage - 1].blocks;
+
+        for (int i = 0; i < row; i++)
+            for (int j = 0; j < col; j++)
+            {
+                if (blockdesign[i * row + j] == 0) continue;
+
+                // 생성 부분 생략함! 위치 설정
+                GameObject newBlock = new GameObject();
+                newBlock.transform.position = new Vector3(-2.5f + j * 2.5f, -1.5f, 2.5f * i);
+                newBlock.gameObject.GetComponent<Block>().InitBlock(i * row + j, blockdesign[i * row + j], this);
+                blocks.Add(newBlock);
+            }
+
+        // 플레이어 오브젝트 생성 및 위치 (0,1,0)
     }
+
 
     // 어떤 블럭의 restcount가 0이 되면 호출 (Block에서 호출)
     public void SetZeroBlock(int idx)
@@ -53,7 +75,11 @@ public class GameManager : MonoBehaviour
     // 게임 종료 조건 만족 시 실행 (Player에서 호출)
     public void GameResult()
     {
-        if (!player.IsPlayerAlive) GameOver(whyover.dead);
+        if (!player.IsPlayerAlive)
+        {
+            GameOver(whyover.dead);
+            Destroy(player.gameObject);
+        }
         else if (blocks.Count > 0) GameOver(whyover.restblocks);
         else GameClear();   // 플레이어 생존, 블럭 모두 제거 -> 게임 클리어
     }

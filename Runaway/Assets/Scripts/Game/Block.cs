@@ -9,7 +9,6 @@ public class Block : MonoBehaviour
 {
     // Info of this block
     int restcount;
-    int row_n, col_n;
     int blocklist_idx;
 
     // Content of this block
@@ -22,10 +21,8 @@ public class Block : MonoBehaviour
     GameManager gm;
 
     // 블럭 초기화. GameManager에서 Block Object 생성 시 호출
-    void InitBlock(int row, int col, int idx, int rest, GameManager gm)
+    public void InitBlock(int idx, int rest, GameManager gm)
     {
-        row_n = row;
-        col_n = col;
         blocklist_idx = idx;
         restcount = rest;
         this.gm = gm;
