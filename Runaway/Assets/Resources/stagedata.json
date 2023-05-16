@@ -1,0 +1,55 @@
+{
+    "version": "1.0.2",
+    "levellist":[
+        {
+            "level":1,
+            "stagelist":[
+                {
+                    "stageNo":1,
+                    "clear": false,
+                    "blocks": [0,1,0,0,1,1,0,0,1]
+                },
+                {
+                    "stageNo":2,
+                    "clear": false,
+                    "blocks": [0,1,0,1,1,0,1,1,0]
+                },
+                {
+                    "stageNo":3,
+                    "clear": false,
+                    "blocks": [0,1,1,0,1,0,0,1,1]
+                },
+                {
+                    "stageNo":4,
+                    "clear": false,
+                    "blocks": [1,2,1,1,1,1,1,0,0]
+                }
+            ]
+        },
+        {
+            "level":2,
+            "stagelist":[
+                {
+                    "stageNo":1,
+                    "clear": false,
+                    "blocks": [0,1,0,0,2,0,0,2,0,0,1,0]
+                },
+                {
+                    "stageNo":2,
+                    "clear": false,
+                    "blocks": [0,1,0,1,1,0,1,1,0,0,1,0]
+                },
+                {
+                    "stageNo":3,
+                    "clear": false,
+                    "blocks": [0,1,1,0,1,0,0,1,0,2,2]
+                },
+                {
+                    "stageNo":4,
+                    "clear": false,
+                    "blocks": [1,2,1,1,1,1,1,0,0,2,2,2]
+                }
+            ]
+        }
+    ]
+}

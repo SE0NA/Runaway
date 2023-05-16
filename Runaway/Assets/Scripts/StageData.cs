@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
+[Serializable]
 public struct Level
 {
     public int level;
     public Stage[] stagelist;
 }
+[Serializable]
 public struct Stage
 {
     public int stageNo;
@@ -16,5 +18,6 @@ public struct Stage
 
 [Serializable]
 public class StageData {
-    public Level[] levellist = new Level[3];
+    public string version;
+    public Level[] levellist;
 }

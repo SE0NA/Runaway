@@ -25,6 +25,12 @@ public class GameManager : MonoBehaviour
     Camera cam;
     Player player;
 
+    private void Awake()
+    {
+        DataManager.instance.LoadStageData();
+        Debug.Log("awake");
+    }
+
     void Start()
     {
         now_level = DataManager.instance.selectedLevel;
@@ -32,6 +38,7 @@ public class GameManager : MonoBehaviour
 
         cam = FindObjectOfType<Camera>();
 
+        Debug.Log("start");
         SettingStage();
     }
 

@@ -5,8 +5,8 @@ using System.IO;
 
 public class DataManager : MonoBehaviour
 {
-    public int selectedLevel;
-    public int selectedStage;
+    public int selectedLevel = 1;
+    public int selectedStage = 1;
 
     static GameObject _container;
 
@@ -26,13 +26,14 @@ public class DataManager : MonoBehaviour
         }
     }
 
-    string stageDataFileName = "Stages.json";
+    string stageDataFileName = "stagedata";
 
     public StageData stagedata = new StageData();
 
     public void LoadStageData()
     {
         string filePath = Application.persistentDataPath + "/" + stageDataFileName;
+
         if (File.Exists(filePath))
         {
             string fromJsonData = File.ReadAllText(filePath);
@@ -42,24 +43,22 @@ public class DataManager : MonoBehaviour
         }
         else
         {
-            Debug.Log(stageDataFileName + " 파일을 찾을 수 없음!");
-            
-            // 임의 데이터
-            selectedLevel = 1;
-            selectedStage = 1;
-
-            stagedata = new StageData();
-            Stage stage = new Stage();
-            stage.stageNo = 1;
-            stage.clear = false;
-            stage.blocks = new int[] { 0, 1, 0, 0, 1, 1, 0, 0, 1 };
-            Level level = new Level();
-            level.level = 1;
-            level.stagelist = new Stage[] { stage };
-            stagedata.levellist = new Level[] { level };
-            Debug.Log("임시 데이터 stagedata 저장");
-            Debug.Log(stagedata.levellist[0].stagelist[0].blocks.Length);
+            // 파일이 존재하지 않으면 Resources 에서 기본 파일을 가져와 저장
+            TextAsset resourceData = Resources.Load(stageDataFileName) as TextAsset;
+            stagedata = JsonUtility.FromJson<StageData>(resourceData.ToString());
+            SaveStageData();
+            Debug.Log(stageDataFileName + " 파일을 찾을 수 없음! 새로운 파일을 Resources로부터 생성");
         }
+
+        // 업데이트된 스테이지 추가
+        if(stagedata.version != Application.version)
+        {
+            // 각 레벨 별로 길이 비교.
+            // 리소스의 추가된 부분부터 붙여넣기
+            // stagedata에 붙이고 저장
+        }
+
+        Debug.Log("stagedata: " + stagedata.levellist[1].stagelist[0].blocks.Length);
     }
     public void SaveStageData()
     {
