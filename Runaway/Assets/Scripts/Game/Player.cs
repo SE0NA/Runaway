@@ -6,29 +6,48 @@ public class Player : MonoBehaviour
 {
     // state of player
     bool isAlive = true;
+    bool isMoving = false;
     PLACE placeWhere = PLACE.START;
     // 
     enum PLACE { START, BLOCK, END };
+    public enum DIR { LEFT, RIGHT, FRONT, BACK };
 
     void Start()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public bool IsPlayerAlive => isAlive;
 
-    public void PlayerObjectMove()
+    public void Move(DIR dir)
     {
-        // back에서 PLACE.START 이면 무시하도록
+        // 움직이는 중이면 기능 X
+        if (isMoving)
+            return;
+        // start 지점에서 back 사용 불가
+        if (placeWhere == PLACE.START && dir == DIR.BACK)
+            return;
+
+        int xDir = 0, zDir = 0;
+        float yRot = 0f;    // 바라보는 방향
+
+        if (dir == DIR.LEFT) { xDir = -1; zDir = 0; yRot = 270f; }
+        else if (dir == DIR.RIGHT) { xDir = 1; zDir = 0; yRot = 90f; }
+        else if (dir == DIR.FRONT) { xDir = 0; zDir = 1; yRot = 0f; }
+        else if (dir == DIR.BACK) { xDir = 0; zDir = -1; yRot = 180f; }
+
+        // 플레이어 방향 전환
+        gameObject.transform.rotation = Quaternion.Euler(0f, yRot, 0f);
+        // 플레이어 이동
+        
+
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        isMoving = true;
+        // 착륙 모션
+
         if (collision.gameObject.tag == "startbuilding")
         {
             placeWhere = PLACE.START;

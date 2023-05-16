@@ -38,10 +38,27 @@ public class DataManager : MonoBehaviour
             string fromJsonData = File.ReadAllText(filePath);
             stagedata = JsonUtility.FromJson<StageData>(fromJsonData);
             Debug.Log(stageDataFileName + " 불러오기 성공!");
+            Debug.Log(stagedata.ToString());
         }
         else
         {
             Debug.Log(stageDataFileName + " 파일을 찾을 수 없음!");
+            
+            // 임의 데이터
+            selectedLevel = 1;
+            selectedStage = 1;
+
+            stagedata = new StageData();
+            Stage stage = new Stage();
+            stage.stageNo = 1;
+            stage.clear = false;
+            stage.blocks = new int[] { 0, 1, 0, 0, 1, 1, 0, 0, 1 };
+            Level level = new Level();
+            level.level = 1;
+            level.stagelist = new Stage[] { stage };
+            stagedata.levellist = new Level[] { level };
+            Debug.Log("임시 데이터 stagedata 저장");
+            Debug.Log(stagedata.levellist[0].stagelist[0].blocks.Length);
         }
     }
     public void SaveStageData()

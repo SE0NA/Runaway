@@ -13,7 +13,7 @@ public class Block : MonoBehaviour
 
     // Content of this block
     Rigidbody rigid_block;
-    [SerializeField] List<Material> blockcolors;
+    [SerializeField] List<Color> blockcolors;
     [SerializeField] List<Color> txtcolors;
     TextMeshPro txt_count;
 
@@ -27,13 +27,14 @@ public class Block : MonoBehaviour
         restcount = rest;
         this.gm = gm;
 
+        txt_count = GetComponentInChildren<TextMeshPro>();
         ChangeBlockSet();
     }
 
     // 블럭의 상태를 색, 텍스트로 표시
     void ChangeBlockSet()
     {
-        gameObject.GetComponent<Material>().color = blockcolors[restcount].color;
+     //   gameObject.GetComponent<Material>().color = blockcolors[restcount];
         if (restcount > 0)
         {
             txt_count.text = restcount.ToString();
