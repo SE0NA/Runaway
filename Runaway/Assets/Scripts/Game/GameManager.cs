@@ -28,7 +28,6 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         DataManager.instance.LoadStageData();
-        Debug.Log("awake");
     }
 
     void Start()
@@ -38,7 +37,6 @@ public class GameManager : MonoBehaviour
 
         cam = FindObjectOfType<Camera>();
 
-        Debug.Log("start");
         SettingStage();
     }
 
@@ -55,16 +53,16 @@ public class GameManager : MonoBehaviour
 
         // 블럭 설치
         int[] blockdesign = DataManager.instance.stagedata.levellist[now_level - 1].stagelist[now_stage - 1].blocks;
-
+        
         for (int i = 0; i < row; i++)
             for (int j = 0; j < col; j++)
             {
-                if (blockdesign[i * row + j] == 0) continue;
+                Debug.Log(i * col + j);
+                if (blockdesign[i * col + j] == 0) continue;
 
                 // 생성 부분 생략함! 위치 설정
-                GameObject newBlock = Instantiate<GameObject>(obj_block, new Vector3(-2.5f + j * 2.5f, -1.5f, 2.5f * i + 2.5f), Quaternion.identity);
-             //   newBlock.transform.position = new Vector3(-2.5f + j * 2.5f, -1.5f, 2.5f * i);
-                newBlock.gameObject.GetComponent<Block>().InitBlock(i * row + j, blockdesign[i * row + j], this);
+                GameObject newBlock = Instantiate<GameObject>(obj_block, new Vector3(-2.5f + j * 2.5f, -1.5f, 2.5f * i + 2.5f), Quaternion.identity, transform.GetChild(0));
+                newBlock.gameObject.GetComponent<Block>().InitBlock(i * col + j, blockdesign[i * col + j], this);
                 blocks.Add(newBlock);
             }
 

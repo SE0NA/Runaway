@@ -6,15 +6,28 @@ public class Player : MonoBehaviour
 {
     // state of player
     bool isAlive = true;
-    bool isMoving = false;
-    PLACE placeWhere = PLACE.START;
-    // 
+    public bool isMoving = false;
+    [SerializeField] PLACE placeWhere = PLACE.START;
+
+    // components
+    public float jumpforce = 2.5f;
+    Rigidbody rigid;
+
+    // enum
     enum PLACE { START, BLOCK, END };
     public enum DIR { LEFT, RIGHT, FRONT, BACK };
 
     void Start()
     {
-        
+        rigid = GetComponent<Rigidbody>();
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.UpArrow)) Move(DIR.FRONT);
+        else if (Input.GetKeyDown(KeyCode.DownArrow)) Move(DIR.BACK);
+        else if (Input.GetKeyDown(KeyCode.LeftArrow)) Move(DIR.LEFT);
+        else if (Input.GetKeyDown(KeyCode.RightArrow)) Move(DIR.RIGHT);
     }
 
     public bool IsPlayerAlive => isAlive;
@@ -22,11 +35,13 @@ public class Player : MonoBehaviour
     public void Move(DIR dir)
     {
         // 움직이는 중이면 기능 X
-        if (isMoving)
+        if (isMoving || !isAlive)
             return;
         // start 지점에서 back 사용 불가
         if (placeWhere == PLACE.START && dir == DIR.BACK)
             return;
+
+        isMoving = true;
 
         int xDir = 0, zDir = 0;
         float yRot = 0f;    // 바라보는 방향
@@ -38,14 +53,14 @@ public class Player : MonoBehaviour
 
         // 플레이어 방향 전환
         gameObject.transform.rotation = Quaternion.Euler(0f, yRot, 0f);
+
         // 플레이어 이동
-        
+        rigid.AddForce(transform.forward * jumpforce, ForceMode.Impulse);
 
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        isMoving = true;
         // 착륙 모션
 
         if (collision.gameObject.tag == "startbuilding")
@@ -60,6 +75,8 @@ public class Player : MonoBehaviour
         {
             placeWhere = PLACE.END;
         }
+
+        isMoving = false;
     }
 
     private void OnTriggerEnter(Collider other)

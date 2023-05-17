@@ -404,7 +404,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &166729707
 Transform:
   m_ObjectHideFlags: 0
@@ -723,6 +723,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: goalbuilding
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b0aad48beb35afa498ba4fc6b53aadd7,
+        type: 3}
+      propertyPath: m_TagString
+      value: endbuilding
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0aad48beb35afa498ba4fc6b53aadd7, type: 3}
@@ -3135,7 +3140,7 @@ GameObject:
   - component: {fileID: 1316218758}
   m_Layer: 0
   m_Name: sample player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
