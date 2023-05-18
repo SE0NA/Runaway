@@ -28,6 +28,7 @@ public class Block : MonoBehaviour
         this.gm = gm;
 
         txt_count = GetComponentInChildren<TextMeshPro>();
+        rigid_block = GetComponent<Rigidbody>();
         ChangeBlockSet();
     }
 
@@ -47,27 +48,28 @@ public class Block : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
         // 플레이어에 의해 밟힘 -> 횟수 감소
-        if (other.tag == "Player")
+        if (collision.gameObject.tag == "Player")
         {
             restcount--;
             ChangeBlockSet();
         }
 
         // 추락 후 제거 지점에 충돌
-        else if (other.tag == "DestroyZone")
+        else if (collision.gameObject.tag == "DestroyZone")
         {
             Destroy(gameObject);
         }
     }
-    private void OnTriggerExit(Collider other)
+    private void OnCollisionExit(Collision collision)
     {
         // 플레이어가 블록을 나감 -> 남은 횟수가 0이면 추락
-        if (other.tag == "Player" && restcount <= 0)
+        if (collision.gameObject.tag == "Player" && restcount <= 0)
         {
-            // 중력
+            rigid_block.useGravity = true;
+            rigid_block.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
         }
     }
 }
