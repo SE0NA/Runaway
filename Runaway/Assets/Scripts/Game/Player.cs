@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     bool isAlive = true;
     public bool isMoving = true;
     [SerializeField] PLACE placeWhere = PLACE.START;
+    float xDir = 0f, zDir = 0f;
+    Vector3 target;
 
     // components
     public float moveforce = 2.5f;
@@ -31,43 +33,50 @@ public class Player : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.S)) Move(DIR.BACK);
         else if (Input.GetKeyDown(KeyCode.A)) Move(DIR.LEFT);
         else if (Input.GetKeyDown(KeyCode.D)) Move(DIR.RIGHT);
+
+        if (isMoving) {
+            transform.position = Vector3.Lerp(gameObject.transform.position, target, moveforce);
+        }
     }
 
     public bool IsPlayerAlive => isAlive;
 
     public void Move(DIR dir)
     {
-        
+        if (!isAlive || isMoving) return;
         // 움직이는 중이면 기능 X
-        if (isMoving || !isAlive)
-            return;
+
         // start 지점에서 back 사용 불가
         if (placeWhere == PLACE.START && dir == DIR.BACK)
             return;
 
-        Debug.Log("move: " + dir.ToString());
-
         isMoving = true;
 
-        float xDir = 0f, zDir = 0f;
         float yRot = 0f;    // 바라보는 방향
 
-        if (dir == DIR.LEFT) { xDir = -1f; yRot = 270f; }
-        else if (dir == DIR.RIGHT) { xDir = 1f; yRot = 90f; }
-        else if (dir == DIR.FRONT) { zDir = 1f; yRot = 0f; }
-        else if (dir == DIR.BACK) { zDir = -1f; yRot = 180f; }
+        if (dir == DIR.LEFT) { xDir = -2.5f; zDir = 0f; yRot = 270f; }
+        else if (dir == DIR.RIGHT) { xDir = 2.5f; zDir = 0f; yRot = 90f; }
+        else if (dir == DIR.FRONT) { xDir = 0f; zDir = 2.5f; yRot = 0f; }
+        else if (dir == DIR.BACK) { xDir = 0f; zDir = -2.5f; yRot = 180f; }
 
         // 플레이어 방향 전환
         gameObject.transform.rotation = Quaternion.Euler(0f, yRot, 0f);
 
         // 플레이어 이동
-     //   rigid.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
-        rigid.AddForce(new Vector3(xDir * moveforce, jumpforce, zDir * moveforce), ForceMode.Impulse);
+        rigid.AddForce(Vector3.up * jumpforce, ForceMode.VelocityChange);
+        target = gameObject.transform.position + new Vector3(xDir, 0.5f, zDir);
+        
+        Debug.Log("move: " + dir.ToString());
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        float newX = Mathf.Round(transform.position.x * 10) * 0.1f;
+        float newZ = Mathf.Round(transform.position.z * 10) * 0.1f;
+        gameObject.transform.position = new Vector3(newX, gameObject.transform.position.y, newZ);
+
         isMoving = false;
+
         // 착륙 모션
         if (collision.gameObject.tag == "startbuilding")
         {

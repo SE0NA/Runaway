@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
         now_stage = DataManager.instance.selectedStage;
 
         cam = FindObjectOfType<Camera>();
+        player = FindObjectOfType<Player>();
 
         SettingStage();
     }
@@ -87,6 +88,8 @@ public class GameManager : MonoBehaviour
         }
         else if (blocks.Count > 0) GameOver(whyover.restblocks);
         else GameClear();   // 플레이어 생존, 블럭 모두 제거 -> 게임 클리어
+
+        Debug.Log("Game 끝");
     }
 
     void GameOver(whyover reason)
