@@ -367,6 +367,8 @@
 "Assets/Scripts/Game/Block.cs"
 "Assets/Scripts/Game/GameManager.cs"
 "Assets/Scripts/Game/Player.cs"
+"Assets/Scripts/Home/HomeListManager.cs"
+"Assets/Scripts/Home/StageBtn.cs"
 "Assets/Scripts/StageData.cs"
 "Assets/TutorialInfo/Scripts/Readme.cs"
 -langversion:9.0

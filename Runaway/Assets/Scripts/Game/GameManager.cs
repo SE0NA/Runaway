@@ -28,7 +28,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        DataManager.instance.LoadStageData();
+        if (DataManager.instance == null)
+            DataManager.instance.LoadStageData();
     }
 
     void Start()

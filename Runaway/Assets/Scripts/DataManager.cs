@@ -5,7 +5,7 @@ using System.IO;
 
 public class DataManager : MonoBehaviour
 {
-    public int selectedLevel = 2;
+    public int selectedLevel = 1;
     public int selectedStage = 1;
 
     static GameObject _container;
