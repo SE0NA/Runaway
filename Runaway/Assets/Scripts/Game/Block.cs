@@ -56,12 +56,6 @@ public class Block : MonoBehaviour
             restcount--;
             ChangeBlockSet();
         }
-
-        // 추락 후 제거 지점에 충돌
-        else if (collision.gameObject.tag == "DestroyZone")
-        {
-            Destroy(gameObject);
-        }
     }
     private void OnCollisionExit(Collision collision)
     {
@@ -70,6 +64,14 @@ public class Block : MonoBehaviour
         {
             rigid_block.useGravity = true;
             rigid_block.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "destroyzone")
+        {
+            Destroy(gameObject);
         }
     }
 }
