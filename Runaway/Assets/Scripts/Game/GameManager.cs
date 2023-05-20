@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
     public enum Result { dead, restblocks, clear }
 
     // Setting Values
-    [SerializeField] List<Transform> trans_cam; // 레벨에 따라 캠 위치가 다름
     [Header("Building")]
     [SerializeField] GameObject goalbuilding;
     [SerializeField] List<Object> obj_list_backgroundSettings;   // 레벨에 따른 백그라운드 디자인(조명, 캠 등)
@@ -48,13 +47,12 @@ public class GameManager : MonoBehaviour
     void SettingStage()
     {
         // 카에라 높이 설정
-     //   cam.transform.position = trans_cam[now_level - 1].position;
 
-        // 블럭 크기 및 종료 빌딩 위치 설정
+        // 카메라 높이 , 블럭 크기, 종료 빌딩 위치 설정
         int row = 0, col = 0;
-        if (now_level == 1) { row = 3; col = 3; goalbuilding.transform.position = new Vector3(0, -2f, 18.2f); }
-        else if (now_level == 2) { row = 4; col = 3; goalbuilding.transform.position = new Vector3(0, -2f, 20.7f); }
-        else if (now_level == 3) { row = 5; col = 3; goalbuilding.transform.position = new Vector3(0, -2f, 23.2f); }
+        if (now_level == 1) { row = 3; col = 3; cam.transform.position = new Vector3(0f, 13f, 4.5f); goalbuilding.transform.position = new Vector3(0, -2f, 18.2f); }
+        else if (now_level == 2) { row = 4; col = 3; cam.transform.position = new Vector3(0f, 13.5f, 5.5f); goalbuilding.transform.position = new Vector3(0, -2f, 20.7f); }
+        else if (now_level == 3) { row = 5; col = 3; cam.transform.position = new Vector3(0f, 15f, 7.5f); goalbuilding.transform.position = new Vector3(0, -2f, 23.2f); }
 
         // 블럭 설치
         int[] blockdesign = DataManager.instance.stagedata.levellist[now_level - 1].stagelist[now_stage - 1].blocks;
