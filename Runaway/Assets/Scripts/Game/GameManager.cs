@@ -31,8 +31,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (DataManager.instance == null)
-            DataManager.instance.LoadStageData();
+        DataManager.instance.LoadStageData();
     }
 
     void Start()

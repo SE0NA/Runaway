@@ -29,6 +29,7 @@ public class Block : MonoBehaviour
 
         txt_count = GetComponentInChildren<TextMeshPro>();
         rigid_block = GetComponent<Rigidbody>();
+       
         ChangeBlockSet();
     }
 
