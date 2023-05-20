@@ -14,18 +14,9 @@ public class HomeListManager : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI txt_level;
 
-    // Start is called before the first frame update
-    private void Awake()
-    {
-        DataManager.instance.LoadStageData();
-    }
 
-    void Start()
-    {
-        SettingList(DataManager.instance.selectedLevel);
-    }
 
-    void SettingList(int level)
+    public void SettingStageList(int level)
     {
         // 이전과 같은 메뉴일 경우 그대로 유지
         if (thisLevel == level) return;
