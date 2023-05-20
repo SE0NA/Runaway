@@ -22,7 +22,7 @@ public class HomeListManager : MonoBehaviour
         if (thisLevel == level) return;
 
         thisLevel = level;
-        txt_level.text = $"Level {thisLevel}";
+        txt_level.text = DataManager.instance.stagedata.levellist[level - 1].title;
 
         // 기존 리스트 삭제
         foreach (Transform child in obj_panel_for_list.transform)

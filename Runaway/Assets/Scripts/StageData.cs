@@ -6,6 +6,7 @@ using System;
 public struct Level
 {
     public int level;
+    public string title;
     public Stage[] stagelist;
 }
 [Serializable]

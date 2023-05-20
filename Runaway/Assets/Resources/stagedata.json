@@ -3,6 +3,7 @@
     "levellist":[
         {
             "level":1,
+            "title":"rabbit",
             "stagelist":[
                 {
                     "stageNo":1,
@@ -28,6 +29,7 @@
         },
         {
             "level":2,
+            "title":"bear",
             "stagelist":[
                 {
                     "stageNo":1,
