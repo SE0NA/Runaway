@@ -33,10 +33,12 @@ public class HomeManager : MonoBehaviour
     {
         obj_start.SetActive(false);
         obj_levelList.SetActive(true);
+        obj_stageList.SetActive(false);
     }
 
     public void ActiveStageList()
     {
+        obj_start.SetActive(false);
         obj_levelList.SetActive(false);
         obj_stageList.GetComponent<HomeListManager>().SettingStageList(DataManager.instance.selectedLevel);
         obj_stageList.SetActive(true);

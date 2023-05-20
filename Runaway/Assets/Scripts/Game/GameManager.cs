@@ -101,6 +101,9 @@ public class GameManager : MonoBehaviour
         {
             // 플레이어 생존, 블럭 모두 제거 -> 게임 클리어
             DataManager.instance.stagedata.levellist[now_level - 1].stagelist[now_stage - 1].clear = true;
+            if (now_stage != DataManager.instance.stagedata.levellist[now_level - 1].stagelist.Length)
+                DataManager.instance.stagedata.levellist[now_level - 1].stagelist[now_stage].unLock = true;
+
             DataManager.instance.SaveStageData();
 
             res = Result.clear;
