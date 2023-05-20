@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     public float moveforce = 2.5f;
     public float jumpforce = 3f;
     Rigidbody rigid;
-    Animator anim;
+    GameManager gm;
 
     // enum
     enum PLACE { START, BLOCK, END };
@@ -23,19 +23,22 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        gm = FindObjectOfType<GameManager>();
         rigid = GetComponent<Rigidbody>();
-        anim = GetComponent<Animator>();
     }
 
     void Update()
     {
+        if (!isAlive)
+            return;
+
         if (Input.GetKeyDown(KeyCode.W)) Move(DIR.FRONT);
         else if (Input.GetKeyDown(KeyCode.S)) Move(DIR.BACK);
         else if (Input.GetKeyDown(KeyCode.A)) Move(DIR.LEFT);
         else if (Input.GetKeyDown(KeyCode.D)) Move(DIR.RIGHT);
 
         if (isMoving) {
-            transform.position = Vector3.Lerp(gameObject.transform.position, target, moveforce);
+            transform.position = Vector3.Slerp(gameObject.transform.position, target, moveforce);
         }
     }
 
@@ -64,7 +67,7 @@ public class Player : MonoBehaviour
 
         // 플레이어 이동
         rigid.AddForce(Vector3.up * jumpforce, ForceMode.VelocityChange);
-        target = gameObject.transform.position + new Vector3(xDir, 0.5f, zDir);
+        target = gameObject.transform.position + new Vector3(xDir, 3f, zDir);
         
         Debug.Log("move: " + dir.ToString());
     }
@@ -89,6 +92,7 @@ public class Player : MonoBehaviour
         else if(collision.gameObject.tag == "endbuilding")
         {
             placeWhere = PLACE.END;
+            gm.GameResult();
         }
     }
 
@@ -96,9 +100,11 @@ public class Player : MonoBehaviour
     {
         if(other.tag == "destroyzone")
         {
-            // 게임 오버
+            gm.GameResult();
+        }
+        else if(other.tag == "freezezone")
+        {
             isAlive = false;
-            FindObjectOfType<GameManager>().GameResult();
         }
     }
 }

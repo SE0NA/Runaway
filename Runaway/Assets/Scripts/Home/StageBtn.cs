@@ -11,7 +11,7 @@ public class StageBtn : MonoBehaviour
     TextMeshProUGUI txt_no;
     Image img_back;
     
-    public void InitBtn(int stageNo, bool isClear)
+    public void InitBtn(int stageNo, bool isClear, bool unLock)
     {
         txt_no = gameObject.transform.GetComponentInChildren<TextMeshProUGUI>();
         img_back = GetComponent<Image>();
@@ -19,7 +19,12 @@ public class StageBtn : MonoBehaviour
         this.stageNo = stageNo;
         txt_no.text = stageNo.ToString();
 
-        img_back.color = isClear ? Color.cyan : Color.gray;
+        if (isClear)
+            img_back.color = Color.cyan;
+        else if (unLock)
+            img_back.color = Color.white;
+        else
+            img_back.color = Color.gray;
     }
 
     public void StartThisStage()

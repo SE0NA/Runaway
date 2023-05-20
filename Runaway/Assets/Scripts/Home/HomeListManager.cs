@@ -31,7 +31,7 @@ public class HomeListManager : MonoBehaviour
         foreach(Stage s in DataManager.instance.stagedata.levellist[level - 1].stagelist)
         {
             GameObject stageBtn = Instantiate<GameObject>(obj_btn_proto, obj_panel_for_list.transform);
-            stageBtn.GetComponent<StageBtn>().InitBtn(s.stageNo, s.clear);
+            stageBtn.GetComponent<StageBtn>().InitBtn(s.stageNo, s.clear, s.unLock);
         }
     }
 }

@@ -14,6 +14,7 @@ public struct Stage
 {
     public int stageNo;
     public bool clear;
+    public bool unLock;
     public int[] blocks;
 }
 

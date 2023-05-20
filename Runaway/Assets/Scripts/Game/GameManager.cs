@@ -5,12 +5,14 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public bool gameEnd = false;
+
     // Info this stage
     int now_level;
     int now_stage;
     List<GameObject> blocks = new List<GameObject>();
     int blockCount = 0;
-    enum whyover { dead, restblocks }
+    public enum Result { dead, restblocks, clear }
 
     // Setting Values
     [SerializeField] List<Transform> trans_cam; // 레벨에 따라 캠 위치가 다름
@@ -25,6 +27,7 @@ public class GameManager : MonoBehaviour
     // Extern
     Camera cam;
     Player player;
+
 
     private void Awake()
     {
@@ -82,26 +85,32 @@ public class GameManager : MonoBehaviour
     // 게임 종료 조건 만족 시 실행 (Player에서 호출)
     public void GameResult()
     {
+        gameEnd = true;
+
+        Result res;
+
         if (!player.IsPlayerAlive)
         {
-            GameOver(whyover.dead);
+            // 플레이어 캐릭터 죽음
             Destroy(player.gameObject);
+            res = Result.dead;
         }
-        else if (blocks.Count > 0) GameOver(whyover.restblocks);
-        else GameClear();   // 플레이어 생존, 블럭 모두 제거 -> 게임 클리어
+        else if (blockCount > 0)
+        {
+            // 남은 블럭 존재
+            res = Result.restblocks;
+        }
+        else
+        {
+            // 플레이어 생존, 블럭 모두 제거 -> 게임 클리어
+            DataManager.instance.stagedata.levellist[now_level - 1].stagelist[now_stage - 1].clear = true;
+            DataManager.instance.SaveStageData();
 
-        Debug.Log("Game 끝");
-    }
+            res = Result.clear;
+        }
 
-    void GameOver(whyover reason)
-    {
-
-    }
-
-    void GameClear()
-    {
-        // 클리어 내용 저장
-        DataManager.instance.stagedata.levellist[now_level - 1].stagelist[now_stage - 1].clear = true;
-        DataManager.instance.SaveStageData();
+        // 결과 표시
+        UIManager uimanager = FindObjectOfType<UIManager>();
+        uimanager.ActiveResult(res);
     }
 }

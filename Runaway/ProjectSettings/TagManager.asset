@@ -8,6 +8,7 @@ TagManager:
   - block
   - endbuilding
   - destroyzone
+  - freezezone
   layers:
   - Default
   - TransparentFX
