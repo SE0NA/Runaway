@@ -10,7 +10,10 @@ public class Player : MonoBehaviour
     public bool isMoving = true;
     [SerializeField] PLACE placeWhere = PLACE.START;
     float xDir = 0f, zDir = 0f;
-    Vector3 target;
+
+    // constraint
+    public int now_x = 0, now_z = 0;
+    int x_range = 1, z_range = 3;
 
     // components
     public float moveforce = 0.1f;
@@ -31,6 +34,19 @@ public class Player : MonoBehaviour
     {
         gm = FindObjectOfType<GameManager>();
         rigid = GetComponent<Rigidbody>();
+
+        if(DataManager.instance.selectedLevel == 1)
+        {
+            x_range = 3 / 2;    z_range = 3;
+        }
+        else if(DataManager.instance.selectedLevel == 2)
+        {
+            x_range = 3 / 2;    z_range = 4;
+        }
+        else if(DataManager.instance.selectedLevel == 3)
+        {
+            x_range = 3 / 2;    z_range = 5;
+        }
     }
 
     void Update()
@@ -54,10 +70,10 @@ public class Player : MonoBehaviour
     public IEnumerator Jump(DIR dir)
     {
         float yRot = 0f;
-        if (dir == DIR.LEFT) { xDir = -1.25f; zDir = 0f; yRot = 270f; }
-        else if (dir == DIR.RIGHT) { xDir = 1.25f; zDir = 0f; yRot = 90f; }
-        else if (dir == DIR.FRONT) { xDir = 0f; zDir = 1.25f; yRot = 0f; }
-        else if (dir == DIR.BACK) { xDir = 0f; zDir = -1.25f; yRot = 180f; }
+        if (dir == DIR.LEFT) { xDir = -1.25f; zDir = 0f; yRot = 270f; now_x--; }
+        else if (dir == DIR.RIGHT) { xDir = 1.25f; zDir = 0f; yRot = 90f; now_x++; }
+        else if (dir == DIR.FRONT) { xDir = 0f; zDir = 1.25f; yRot = 0f; now_z++; }
+        else if (dir == DIR.BACK) { xDir = 0f; zDir = -1.25f; yRot = 180f; now_z--; }
 
         gameObject.transform.rotation = Quaternion.Euler(0f, yRot, 0f);
 
@@ -94,11 +110,23 @@ public class Player : MonoBehaviour
         if (placeWhere == PLACE.START && dir == DIR.BACK)
             return;
 
+        // 이동 제한
+        if (dir == DIR.LEFT && now_x <= -x_range)
+            return;
+        else if (dir == DIR.RIGHT && now_x >= x_range)
+            return;
+        else if (dir == DIR.BACK && now_z <= 0)
+            return;
+
+
         isMoving = true;
 
         StartCoroutine("Jump", dir);
 
         Debug.Log("move");
+
+
+
         /*
         float yRot = 0f;    // 바라보는 방향
 

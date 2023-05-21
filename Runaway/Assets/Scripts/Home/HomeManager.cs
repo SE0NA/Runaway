@@ -7,9 +7,12 @@ public class HomeManager : MonoBehaviour
     [SerializeField] GameObject obj_start;
     [SerializeField] GameObject obj_levelList;
     [SerializeField] GameObject obj_stageList;
+    [SerializeField] GameObject obj_set;
 
     [SerializeField] GameObject obj_prf_levelbtn;
     [SerializeField] Transform trans_level_content;
+
+    
 
     void Awake()
     {
@@ -34,6 +37,7 @@ public class HomeManager : MonoBehaviour
         obj_start.SetActive(false);
         obj_levelList.SetActive(true);
         obj_stageList.SetActive(false);
+        obj_set.SetActive(false);
     }
 
     public void ActiveStageList()
@@ -42,6 +46,28 @@ public class HomeManager : MonoBehaviour
         obj_levelList.SetActive(false);
         obj_stageList.GetComponent<HomeListManager>().SettingStageList(DataManager.instance.selectedLevel);
         obj_stageList.SetActive(true);
+        obj_set.SetActive(false);
+    }
+
+    public void ActiveSetting()
+    {
+        obj_start.SetActive(false);
+        obj_set.SetActive(true);
+    }
+
+    public void CloseSetting()
+    {
+        obj_set.SetActive(false);
+        obj_start.SetActive(true);
+    }
+
+    public void Set_Volume(float value)
+    {
+
+    }
+    public void Set_Haptic(bool use)
+    {
+
     }
 
 }
