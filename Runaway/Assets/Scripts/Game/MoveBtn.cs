@@ -16,8 +16,10 @@ public class MoveBtn : MonoBehaviour
         // 버튼 모양 이미지에 맞추기
         this.GetComponent<Image>().alphaHitTestMinimumThreshold = AlphaThreshold;
 
-        player = FindObjectOfType<Player>();
         btn = GetComponent<Button>();
+       
+
+        player = FindObjectOfType<Player>();
         btn.onClick.AddListener(BtnClick);
     }
 
