@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using Unity.VisualScripting;
 
 public class DataManager : MonoBehaviour
 {
@@ -39,7 +40,6 @@ public class DataManager : MonoBehaviour
             string fromJsonData = File.ReadAllText(filePath);
             stagedata = JsonUtility.FromJson<StageData>(fromJsonData);
             Debug.Log(stageDataFileName + " 불러오기 성공!");
-            Debug.Log(stagedata.ToString());
         }
         else
         {
@@ -50,16 +50,34 @@ public class DataManager : MonoBehaviour
             Debug.Log(stageDataFileName + " 파일을 찾을 수 없음! 새로운 파일을 Resources로부터 생성");
         }
 
-        // 업데이트된 스테이지 추가
+        // 업데이트 스테이지
         if(stagedata.version != Application.version)
         {
-            // 각 레벨 별로 길이 비교.
-            // 리소스의 추가된 부분부터 붙여넣기
-            // stagedata에 붙이고 저장
+            stagedata = UpdataStageData();
+            SaveStageData();
         }
 
-        Debug.Log("stagedata: " + stagedata.levellist[1].stagelist[0].blocks.Length);
     }
+    StageData UpdataStageData()
+    {
+        StageData newSD = new StageData();
+
+        // 리소스 파일(업데이트 파일)에 기존 파일 내용 입력
+        TextAsset resourceData = Resources.Load(stageDataFileName) as TextAsset;
+        newSD = JsonUtility.FromJson<StageData>(resourceData.ToString());
+
+        foreach (Level l in stagedata.levellist)
+            foreach(Stage s in stagedata.levellist[l.level-1].stagelist)
+            {
+                newSD.levellist[l.level - 1].stagelist[s.stageNo - 1] = s;
+            }
+
+        Debug.Log(stageDataFileName + " 파일 업데이트 완료! >> newSD.length: " + newSD.levellist[0].stagelist.Length);
+
+        
+        return newSD;
+    }
+
     public void SaveStageData()
     {
         string toJsonData = JsonUtility.ToJson(stagedata, true);
