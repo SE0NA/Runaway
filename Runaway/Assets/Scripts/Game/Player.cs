@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     public float jumpforce = 3f;
     Rigidbody rigid;
     GameManager gm;
+    Animator anim;
 
     public AnimationCurve curveJumpUp;
     public AnimationCurve curveJumpDown;
@@ -34,6 +35,7 @@ public class Player : MonoBehaviour
     {
         gm = FindObjectOfType<GameManager>();
         rigid = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
 
         if(DataManager.instance.selectedLevel == 1)
         {
@@ -81,6 +83,8 @@ public class Player : MonoBehaviour
         Vector3 targetPos = startPos + new Vector3(xDir, jumpHeight, zDir);
 
         float timer = 0.0f;
+
+        anim.SetBool("Jump", true);
 
         while(timer < jumpTime)
         {
@@ -153,6 +157,7 @@ public class Player : MonoBehaviour
         gameObject.transform.position = new Vector3(newX, gameObject.transform.position.y, newZ);
 
         isMoving = false;
+        anim.SetBool("Jump", false);
 
         // Âø·ú ¸ð¼Ç
         if (collision.gameObject.tag == "startbuilding")
