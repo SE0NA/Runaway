@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
-using Unity.VisualScripting;
 
 public class DataManager : MonoBehaviour
 {
@@ -38,6 +37,10 @@ public class DataManager : MonoBehaviour
         if (File.Exists(filePath))
         {
             string fromJsonData = File.ReadAllText(filePath);
+
+            //복호화
+            fromJsonData = Crypto.AESDecrypt128(fromJsonData);
+
             stagedata = JsonUtility.FromJson<StageData>(fromJsonData);
             Debug.Log(stageDataFileName + " 불러오기 성공!");
         }
@@ -88,6 +91,9 @@ public class DataManager : MonoBehaviour
     {
         string toJsonData = JsonUtility.ToJson(stagedata, true);
         string filePath = Application.persistentDataPath + "/" + stageDataFileName;
+
+        // 암호화
+        toJsonData = Crypto.AESEncrypt128(toJsonData);
 
         File.WriteAllText(filePath, toJsonData);
         Debug.Log(stageDataFileName + "파일 데이터 저장 완료");
