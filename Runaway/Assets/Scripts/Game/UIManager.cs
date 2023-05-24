@@ -47,11 +47,6 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene("Home");
     }
 
-    public void Click_Replay()
-    {
-        SceneManager.LoadScene("Game");
-    }
-
     public void Click_Next()
     {
         DataManager.instance.selectedStage++;

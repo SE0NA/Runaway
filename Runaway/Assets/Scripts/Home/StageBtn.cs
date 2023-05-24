@@ -38,6 +38,13 @@ public class StageBtn : MonoBehaviour
         DataManager.instance.selectedStage = stageNo;
 
         Debug.Log("level: " + DataManager.instance.selectedLevel + " / stage: " + DataManager.instance.selectedStage);
+        
+        
+        /*
+        if(ReplayBtn.rest <= 0)
+        {
+        }
+        */
 
         SceneManager.LoadScene("Game");
     }

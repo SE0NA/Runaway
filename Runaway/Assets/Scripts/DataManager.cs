@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System;
 
 public class DataManager : MonoBehaviour
 {
@@ -26,8 +27,9 @@ public class DataManager : MonoBehaviour
         }
     }
 
-    string stageDataFileName = "stagedata";
+    // StageData ////////////////////////////////////////////////////////////
 
+    string stageDataFileName = "stagedata";
     public StageData stagedata = new StageData();
 
     public void LoadStageData()
@@ -50,6 +52,7 @@ public class DataManager : MonoBehaviour
             TextAsset resourceData = Resources.Load(stageDataFileName) as TextAsset;
             stagedata = JsonUtility.FromJson<StageData>(resourceData.ToString());
             SaveStageData();
+            GetRestHeart();
             Debug.Log(stageDataFileName + " 파일을 찾을 수 없음! 새로운 파일을 Resources로부터 생성");
         }
 
@@ -109,5 +112,29 @@ public class DataManager : MonoBehaviour
             File.Delete(filePath);
 
         Debug.Log("게임 데이터 초기화 완료!");
+    }
+
+
+    public void GetRestHeart()
+    {
+        string data = PlayerPrefs.GetString("restdata","0");
+        if (data.Equals("0"))   // 파일 없었음
+        {
+            SetRestHeart(3);
+            ReplayBtn.rest = 3;
+        }
+        else
+        {
+            int rest = Int32.Parse(Crypto.AESDecrypt128(data));
+
+            if (rest > 3) rest = 3;
+
+            ReplayBtn.rest = rest;
+        }
+    }
+    public void SetRestHeart(int rest)
+    {
+        string data = Crypto.AESEncrypt128(rest.ToString());
+        PlayerPrefs.SetString("restdata", data);
     }
 }
