@@ -67,10 +67,16 @@ public class DataManager : MonoBehaviour
         newSD = JsonUtility.FromJson<StageData>(resourceData.ToString());
 
         foreach (Level l in stagedata.levellist)
-            foreach(Stage s in stagedata.levellist[l.level-1].stagelist)
+            foreach (Stage s in stagedata.levellist[l.level - 1].stagelist)
             {
                 newSD.levellist[l.level - 1].stagelist[s.stageNo - 1] = s;
             }
+
+        // 이미 모든 스테이지가 클리어된 스테이지
+        // 기존 마지막 스테이지의 클리어 여부에 따라 그 다음 스테이지(new)의 unLock 설정
+        foreach (Level l in stagedata.levellist)
+            if (l.stagelist[l.stagelist.Length - 1].clear)
+                newSD.levellist[l.level - 1].stagelist[l.stagelist.Length].unLock = true;
 
         Debug.Log(stageDataFileName + " 파일 업데이트 완료! >> newSD.length: " + newSD.levellist[0].stagelist.Length);
 
@@ -85,5 +91,17 @@ public class DataManager : MonoBehaviour
 
         File.WriteAllText(filePath, toJsonData);
         Debug.Log(stageDataFileName + "파일 데이터 저장 완료");
+    }
+
+    public void FileDelete()
+    {
+        // PlayerPrefs
+        PlayerPrefs.DeleteAll();
+
+        string filePath = Application.persistentDataPath + "/" + stageDataFileName;
+        if(File.Exists(filePath))
+            File.Delete(filePath);
+
+        Debug.Log("게임 데이터 초기화 완료!");
     }
 }
