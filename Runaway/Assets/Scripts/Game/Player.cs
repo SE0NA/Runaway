@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static Player;
 
 public class Player : MonoBehaviour
 {
@@ -50,7 +49,7 @@ public class Player : MonoBehaviour
             x_range = 3 / 2;    z_range = 5;
         }
     }
-
+    /*
     void Update()
     {
         if (!isAlive)
@@ -60,12 +59,13 @@ public class Player : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.S)) Move(DIR.BACK);
         else if (Input.GetKeyDown(KeyCode.A)) Move(DIR.LEFT);
         else if (Input.GetKeyDown(KeyCode.D)) Move(DIR.RIGHT);
-        /*
+       
         if (isMoving) {
             transform.position = Vector3.Lerp(gameObject.transform.position, target, moveforce);
         }
-        */
+        
     }
+    */
 
     public bool IsPlayerAlive => isAlive;
 
@@ -122,32 +122,9 @@ public class Player : MonoBehaviour
         else if (dir == DIR.BACK && now_z <= 0)
             return;
 
-
         isMoving = true;
-
         StartCoroutine("Jump", dir);
 
-        Debug.Log("move");
-
-
-
-        /*
-        float yRot = 0f;    // 바라보는 방향
-
-        if (dir == DIR.LEFT) { xDir = -2.5f; zDir = 0f; yRot = 270f; }
-        else if (dir == DIR.RIGHT) { xDir = 2.5f; zDir = 0f; yRot = 90f; }
-        else if (dir == DIR.FRONT) { xDir = 0f; zDir = 2.5f; yRot = 0f; }
-        else if (dir == DIR.BACK) { xDir = 0f; zDir = -2.5f; yRot = 180f; }
-
-        // 플레이어 방향 전환
-        gameObject.transform.rotation = Quaternion.Euler(0f, yRot, 0f);
-
-        // 플레이어 이동
-        //    rigid.AddForce(Vector3.up * jumpforce, ForceMode.VelocityChange);
-        target = gameObject.transform.position + new Vector3(xDir, 0f, zDir);
-        
-        Debug.Log("move: " + dir.ToString());
-        */
     }
 
     private void OnCollisionEnter(Collision collision)
