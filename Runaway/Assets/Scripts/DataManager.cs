@@ -52,7 +52,6 @@ public class DataManager : MonoBehaviour
             TextAsset resourceData = Resources.Load(stageDataFileName) as TextAsset;
             stagedata = JsonUtility.FromJson<StageData>(resourceData.ToString());
             SaveStageData();
-            GetRestHeart();
             Debug.Log(stageDataFileName + " 파일을 찾을 수 없음! 새로운 파일을 Resources로부터 생성");
         }
 
@@ -62,6 +61,8 @@ public class DataManager : MonoBehaviour
             stagedata = UpdataStageData();
             SaveStageData();
         }
+
+        GetRestHeart();
 
     }
     StageData UpdataStageData()
