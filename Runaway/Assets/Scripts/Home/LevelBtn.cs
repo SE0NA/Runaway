@@ -12,11 +12,16 @@ public class LevelBtn : MonoBehaviour
     [SerializeField] TextMeshProUGUI txt_title;
     [SerializeField] Slider slider;
 
+    [SerializeField] List<Sprite> list_img;
+    [SerializeField] Image img;
+
     public void Init(int level, string title, HomeManager hm)
     {
         mylevel = level;
         txt_title.text = title;
         homeManager = hm;
+
+        img.sprite = list_img[mylevel - 1];
 
         slider.interactable = false;
         SettingSlider();

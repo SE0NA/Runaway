@@ -11,7 +11,11 @@ public class StageBtn : MonoBehaviour
     TextMeshProUGUI txt_no;
     Image img_back;
     Button this_btn;
-    
+
+    [SerializeField] Color color_clear;
+    [SerializeField] Color color_unlock;
+    [SerializeField] Color color_lock;
+
     public void InitBtn(int stageNo, bool isClear, bool unLock)
     {
         txt_no = gameObject.transform.GetComponentInChildren<TextMeshProUGUI>();
@@ -22,12 +26,12 @@ public class StageBtn : MonoBehaviour
         txt_no.text = stageNo.ToString();
 
         if (isClear)
-            img_back.color = Color.cyan;
+            img_back.color = color_clear;
         else if (unLock)
-            img_back.color = Color.white;
+            img_back.color = color_unlock;
         else
         {
-            img_back.color = Color.gray;
+            img_back.color = color_lock;
             this_btn.interactable = false;
         }
 
