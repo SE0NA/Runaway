@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject btn_next;
     [SerializeField] TextMeshProUGUI txt_failde_reason;
 
+    public bool activeMenu = false;
     void Start()
     {
         ui_set1.SetActive(true);
@@ -29,6 +30,7 @@ public class UIManager : MonoBehaviour
     public void Click_Menu()
     {
         ui_set1.SetActive(false);
+        activeMenu = true;
         ui_set2.SetActive(true);
 
         // 게임 UI 제한
@@ -37,6 +39,7 @@ public class UIManager : MonoBehaviour
     public void Click_Close_Set2()
     {
         ui_set2.SetActive(false);
+        activeMenu = false;
         ui_set1.SetActive(true);
 
         // 게임 UI 실행
@@ -55,7 +58,8 @@ public class UIManager : MonoBehaviour
 
     public void ActiveResult(GameManager.Result result)
     {
-        if(result == GameManager.Result.clear)
+        activeMenu = true;
+        if (result == GameManager.Result.clear)
         {
             ui_set1.SetActive(false);
             ui_clear.SetActive(true);

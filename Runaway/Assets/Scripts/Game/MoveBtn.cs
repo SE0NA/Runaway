@@ -9,6 +9,7 @@ public class MoveBtn : MonoBehaviour
     public float AlphaThreshold = 0.1f;
     Button btn;
     Player player;
+    UIManager uimanager;
 
     // Start is called before the first frame update
     void Start()
@@ -20,10 +21,14 @@ public class MoveBtn : MonoBehaviour
 
         player = FindObjectOfType<Player>();
         btn.onClick.AddListener(BtnClick);
+        uimanager = FindObjectOfType<UIManager>();
     }
 
     void BtnClick()
     {
-        player.Move(dir);
+        if (!uimanager.activeMenu)
+        {
+            player.Move(dir);
+        }
     }
 }
