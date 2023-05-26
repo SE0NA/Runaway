@@ -100,7 +100,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 2
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -237,7 +237,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 7848e578e3da1f34b8eafc5b4995dea1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -284,14 +284,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d3da6c0b9d56ce4897cca6e713e5b48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockcolors:
-  - {r: 1, g: 0.7216981, b: 0.75443953, a: 1}
-  - {r: 1, g: 0.951931, b: 0.5330188, a: 1}
-  - {r: 0.5990566, g: 0.9223979, b: 1, a: 1}
+  block_mat:
+  - {fileID: 2100000, guid: 7848e578e3da1f34b8eafc5b4995dea1, type: 2}
+  - {fileID: 2100000, guid: 99daa6898731198428c1ee5f3fa40c2a, type: 2}
+  - {fileID: 2100000, guid: 412f240485f05f541aa5dd349c89399e, type: 2}
+  - {fileID: 2100000, guid: e5630277f7acd5e46812447a8ce0eaed, type: 2}
+  - {fileID: 2100000, guid: 70a6352c55488954281c477cdd0e76e8, type: 2}
+  - {fileID: 2100000, guid: aeb4654e5cb17b440a888b2466bc85b4, type: 2}
   txtcolors:
-  - {r: 1, g: 0, b: 0, a: 1}
-  - {r: 1, g: 0.632496, b: 0, a: 1}
-  - {r: 0.091372415, g: 0, b: 0.6132076, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0.4433962, g: 0, b: 0, a: 1}
+  - {r: 1, g: 0.55099326, b: 0, a: 1}
+  - {r: 0.00090881344, g: 0.38679248, b: 0, a: 1}
+  - {r: 0, g: 0.21782874, b: 0.34117648, a: 1}
+  - {r: 0.26398087, g: 0, b: 0.6226415, a: 1}
 --- !u!54 &-4242554486135337746
 Rigidbody:
   m_ObjectHideFlags: 0
