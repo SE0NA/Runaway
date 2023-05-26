@@ -1419,7 +1419,9 @@ MonoBehaviour:
   ui_clear: {fileID: 989546715}
   ui_failed: {fileID: 1761715839}
   btn_next: {fileID: 77960965}
-  txt_failde_reason: {fileID: 121025502}
+  txt_clear_stage: {fileID: 1101250637}
+  txt_failed_stage: {fileID: 588463271}
+  txt_failed_reason: {fileID: 121025502}
   activeMenu: 0
 --- !u!1 &285955304
 GameObject:

@@ -12,7 +12,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject ui_failed;
 
     [SerializeField] GameObject btn_next;
-    [SerializeField] TextMeshProUGUI txt_failde_reason;
+    [SerializeField] TextMeshProUGUI txt_clear_stage;
+    [SerializeField] TextMeshProUGUI txt_failed_stage;
+    [SerializeField] TextMeshProUGUI txt_failed_reason;
 
     public bool activeMenu = false;
     Player player;
@@ -30,6 +32,9 @@ public class UIManager : MonoBehaviour
         if (DataManager.instance.selectedStage == DataManager.instance.stagedata.levellist[DataManager.instance.selectedLevel - 1].stagelist.Length)
             Destroy(btn_next);
 
+        string str_stage = DataManager.instance.selectedLevel.ToString() + " - " + DataManager.instance.selectedStage.ToString();
+        txt_clear_stage.text = str_stage;
+        txt_failed_stage.text = str_stage;
     }
 
     public void Click_Menu()
@@ -77,9 +82,9 @@ public class UIManager : MonoBehaviour
             ui_set1.SetActive(false);
 
             if (result == GameManager.Result.dead)
-                txt_failde_reason.text = "You were falled!";
+                txt_failed_reason.text = "You fell!";
             else
-                txt_failde_reason.text = "The blocks are left!";
+                txt_failed_reason.text = "There are blocks left!";
 
             ui_failed.SetActive(true);
         }
