@@ -74,14 +74,14 @@ Material:
     - _SpecularHighlights: 1
     - _SpecularSize: 0
     - _SrcBlend: 1
-    - _StepAmount: 3
-    - _StepWidth: 0.88
+    - _StepAmount: 2
+    - _StepWidth: 0.4
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.15663938, g: 0.35275087, b: 0.6037736, a: 1}
+    - _Color: {r: 0.0758722, g: 0.17086369, b: 0.2924528, a: 1}
     - _Emission: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _ShadowTint: {r: 0.043387335, g: 0.06576662, b: 0.23584908, a: 1}
+    - _ShadowTint: {r: 0, g: 0, b: 0, a: 1}
     - _Specular: {r: 0.32475966, g: 0.5020733, b: 0.7735849, a: 0}
   m_BuildTextureStacks: []

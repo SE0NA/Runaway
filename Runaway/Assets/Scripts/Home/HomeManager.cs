@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class HomeManager : MonoBehaviour
@@ -115,7 +116,7 @@ public class HomeManager : MonoBehaviour
         AudioManager.instance.SetSFXVolume(slider_sfx.value);
         AudioManager.instance.SetHaptic(toggle_haptic.isOn);
 
-        CloseDeletePop();
+        SceneManager.LoadScene("Home");
     }
 
     public void Slider_Set_BGM()

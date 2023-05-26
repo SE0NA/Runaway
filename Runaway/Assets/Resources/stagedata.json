@@ -3,7 +3,7 @@
     "levellist":[
         {
             "level":1,
-            "title":"rabbit",
+            "title":"turtle",
             "stagelist":[
                 {
                     "stageNo":1,
@@ -33,7 +33,7 @@
         },
         {
             "level":2,
-            "title":"bear",
+            "title":"dog",
             "stagelist":[
                 {
                     "stageNo":1,
@@ -58,6 +58,36 @@
                     "clear": false,
                     "unLock": false,
                     "blocks": [1,2,1,1,1,1,1,0,0,2,2,2]
+                }
+            ]
+        },
+        {
+            "level":3,
+            "title":"bear",
+            "stagelist":[
+                {
+                    "stageNo":1,
+                    "clear": false,
+                    "unLock": true,
+                    "blocks": [0,1,0,0,1,0,0,1,0,0,1,0,0,1,0]
+                },
+                {
+                    "stageNo":2,
+                    "clear": false,
+                    "unLock": false,
+                    "blocks": [0,1,0,0,1,0,0,1,0,0,1,0,0,1,0]
+                },
+                {
+                    "stageNo":3,
+                    "clear": false,
+                    "unLock": false,
+                    "blocks": [0,1,0,0,1,0,0,1,0,0,1,0,0,1,0]
+                },
+                {
+                    "stageNo":4,
+                    "clear": false,
+                    "unLock": false,
+                    "blocks": [0,1,0,0,1,0,0,1,0,0,1,0,0,1,0]
                 }
             ]
         }

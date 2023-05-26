@@ -18,9 +18,6 @@ public class HomeListManager : MonoBehaviour
 
     public void SettingStageList(int level)
     {
-        // 이전과 같은 메뉴일 경우 그대로 유지
-        if (thisLevel == level) return;
-
         thisLevel = level;
         txt_level.text = DataManager.instance.stagedata.levellist[level - 1].title;
 
