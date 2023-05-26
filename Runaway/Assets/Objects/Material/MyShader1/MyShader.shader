@@ -35,7 +35,8 @@ Shader "Custom/MyShader"    // ToonShader
 
             return fRamp_Tex;
         }
+
         ENDCG
     }
-    FallBack "Diffuse"
+        FallBack "Standard"
 }
