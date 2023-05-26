@@ -16,8 +16,16 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI txt_failed_stage;
     [SerializeField] TextMeshProUGUI txt_failed_reason;
 
+    [Header("AudioClips")]
+    [SerializeField] AudioClip clip_menu;
+    [SerializeField] AudioClip clip_btn;
+    [SerializeField] AudioClip clip_failed;
+    [SerializeField] AudioClip clip_completed;
+
     public bool activeMenu = false;
     Player player;
+    AudioSource audioSource;
+
 
     void Start()
     {
@@ -32,6 +40,9 @@ public class UIManager : MonoBehaviour
         if (DataManager.instance.selectedStage == DataManager.instance.stagedata.levellist[DataManager.instance.selectedLevel - 1].stagelist.Length)
             Destroy(btn_next);
 
+        audioSource = GetComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+
         string str_stage = DataManager.instance.selectedLevel.ToString() + " - " + DataManager.instance.selectedStage.ToString();
         txt_clear_stage.text = str_stage;
         txt_failed_stage.text = str_stage;
@@ -41,6 +52,8 @@ public class UIManager : MonoBehaviour
     {
         if (!player.isMoving)
         {
+            audioSource.PlayOneShot(clip_menu);
+
             ui_set1.SetActive(false);
             activeMenu = true;
             ui_set2.SetActive(true);
@@ -49,6 +62,7 @@ public class UIManager : MonoBehaviour
 
     public void Click_Close_Set2()
     {
+        audioSource.PlayOneShot(clip_btn);
         ui_set2.SetActive(false);
         activeMenu = false;
         ui_set1.SetActive(true);
@@ -58,11 +72,15 @@ public class UIManager : MonoBehaviour
 
     public void Click_Home()
     {
+        audioSource.PlayOneShot(clip_btn);
+
         SceneManager.LoadScene("Home");
     }
 
     public void Click_Next()
     {
+        audioSource.PlayOneShot(clip_btn);
+
         DataManager.instance.selectedStage++;
         SceneManager.LoadScene("Game");
     }
@@ -74,11 +92,13 @@ public class UIManager : MonoBehaviour
 
         if (result == GameManager.Result.clear)
         {
+            audioSource.PlayOneShot(clip_completed);
             ui_set1.SetActive(false);
             ui_clear.SetActive(true);
         }
         else
         {
+            audioSource.PlayOneShot(clip_failed);
             ui_set1.SetActive(false);
 
             if (result == GameManager.Result.dead)

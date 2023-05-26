@@ -24,7 +24,9 @@ public class HomeManager : MonoBehaviour
     [SerializeField] GameObject obj_prf_levelbtn;
     [SerializeField] Transform trans_level_content;
 
-    
+    [Header("Sound")]
+    [SerializeField] AudioClip audioclip_btn;
+    AudioSource audioSource;
 
     void Awake()
     {
@@ -33,6 +35,8 @@ public class HomeManager : MonoBehaviour
 
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+        audioSource.playOnAwake = false;
         SettingLevelList();
     }
 
@@ -44,8 +48,15 @@ public class HomeManager : MonoBehaviour
         }
     }
 
+    void PlayBtnAudio()
+    {
+        audioSource.Play();
+    }
+
     public void ActiveLevelList()
     {
+        PlayBtnAudio();
+
         obj_start.SetActive(false);
         obj_levelList.SetActive(true);
         obj_stageList.SetActive(false);
@@ -53,12 +64,16 @@ public class HomeManager : MonoBehaviour
     }
     public void BackFromLevelList()
     {
+        PlayBtnAudio();
+
         obj_levelList.SetActive(false);
         obj_start.SetActive(true);
     }
 
     public void ActiveStageList()
     {
+        PlayBtnAudio();
+
         obj_start.SetActive(false);
         obj_levelList.SetActive(false);
         obj_stageList.GetComponent<HomeListManager>().SettingStageList(DataManager.instance.selectedLevel);
@@ -68,6 +83,8 @@ public class HomeManager : MonoBehaviour
 
     public void ActiveSetting()
     {
+        PlayBtnAudio();
+
         SettingWithSet();
 
         obj_start.SetActive(false);
@@ -83,6 +100,7 @@ public class HomeManager : MonoBehaviour
 
     public void CloseSetting()
     {
+        PlayBtnAudio();
         // 값 저장
         SavePlayerPrefs();
 
@@ -99,16 +117,22 @@ public class HomeManager : MonoBehaviour
 
     public void ActiveDeletePop()
     {
+        PlayBtnAudio();
+
         obj_set.SetActive(false);
         obj_delete.SetActive(true);
     }
     public void CloseDeletePop()
     {
+        PlayBtnAudio();
+
         obj_delete.SetActive(false);
         obj_set.SetActive(true);
     }
     public void DeleteData()
     {
+        PlayBtnAudio();
+
         DataManager.instance.FileDelete();
 
         SettingWithSet();   // slider playerprefs 초기화 맞춤
