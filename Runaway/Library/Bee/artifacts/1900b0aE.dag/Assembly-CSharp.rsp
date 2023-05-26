@@ -391,6 +391,7 @@
 "Assets/Scripts/Crypto.cs"
 "Assets/Scripts/DataManager.cs"
 "Assets/Scripts/Game/Block.cs"
+"Assets/Scripts/Game/ControllerGuide.cs"
 "Assets/Scripts/Game/GameManager.cs"
 "Assets/Scripts/Game/MoveBtn.cs"
 "Assets/Scripts/Game/Player.cs"

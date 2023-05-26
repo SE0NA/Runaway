@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     // state of player
     bool isAlive = true;
     public bool isMoving = true;
+    public bool isMoved = false;
     [SerializeField] PLACE placeWhere = PLACE.START;
     float xDir = 0f, zDir = 0f;
 
@@ -123,6 +124,7 @@ public class Player : MonoBehaviour
             return;
 
         isMoving = true;
+        isMoved = true;
         StartCoroutine("Jump", dir);
 
     }

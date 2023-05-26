@@ -15,6 +15,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI txt_failde_reason;
 
     public bool activeMenu = false;
+    Player player;
+
     void Start()
     {
         ui_set1.SetActive(true);
@@ -22,18 +24,22 @@ public class UIManager : MonoBehaviour
         ui_clear.SetActive(false);
         ui_failed.SetActive(false);
 
+        player = FindObjectOfType<Player>();
+
         // 다음 레벨이 없으면 다음 스테이지 버튼 제거
         if (DataManager.instance.selectedStage == DataManager.instance.stagedata.levellist[DataManager.instance.selectedLevel - 1].stagelist.Length)
             Destroy(btn_next);
+
     }
 
     public void Click_Menu()
     {
-        ui_set1.SetActive(false);
-        activeMenu = true;
-        ui_set2.SetActive(true);
-
-        // 게임 UI 제한
+        if (!player.isMoving)
+        {
+            ui_set1.SetActive(false);
+            activeMenu = true;
+            ui_set2.SetActive(true);
+        }
     }
 
     public void Click_Close_Set2()
@@ -59,6 +65,8 @@ public class UIManager : MonoBehaviour
     public void ActiveResult(GameManager.Result result)
     {
         activeMenu = true;
+        Handheld.Vibrate(); // 진동
+
         if (result == GameManager.Result.clear)
         {
             ui_set1.SetActive(false);
