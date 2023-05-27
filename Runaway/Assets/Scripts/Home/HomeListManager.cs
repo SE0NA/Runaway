@@ -7,8 +7,6 @@ using Unity.VisualScripting.Antlr3.Runtime.Tree;
 
 public class HomeListManager : MonoBehaviour
 {
-    int thisLevel = 0;
-
     [SerializeField] GameObject obj_btn_proto;
     [SerializeField] GameObject obj_panel_for_list;
 
@@ -16,19 +14,21 @@ public class HomeListManager : MonoBehaviour
 
 
 
-    public void SettingStageList(int level)
+    public void SettingStageList()
     {
-        thisLevel = level;
-        txt_level.text = DataManager.instance.stagedata.levellist[level - 1].title;
+        txt_level.text = DataManager.instance.leveldata.levellist[DataManager.instance.selectedLevel - 1].title;
 
         // 기존 리스트 삭제
         foreach (Transform child in obj_panel_for_list.transform)
             Destroy(child.gameObject);
 
-        foreach(Stage s in DataManager.instance.stagedata.levellist[level - 1].stagelist)
+        bool unLock = true;
+        foreach (Stage s in DataManager.instance.stagedata.stagelist)
         {
             GameObject stageBtn = Instantiate<GameObject>(obj_btn_proto, obj_panel_for_list.transform);
-            stageBtn.GetComponent<StageBtn>().InitBtn(s.stageNo, s.clear, s.unLock);
+            stageBtn.GetComponent<StageBtn>().InitBtn(s.stageNo, s.clear, unLock);
+            unLock = s.clear;
         }
     }
+
 }

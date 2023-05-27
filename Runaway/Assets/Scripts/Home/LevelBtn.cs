@@ -29,11 +29,9 @@ public class LevelBtn : MonoBehaviour
 
     void SettingSlider()
     {
-        
-        int total = DataManager.instance.stagedata.levellist[mylevel-1].stagelist.Length;
-        int clear = 0;
-        foreach (Stage s in DataManager.instance.stagedata.levellist[mylevel-1].stagelist)
-            if (s.clear) clear++;
+
+        int total = DataManager.instance.leveldata.levellist[mylevel - 1].total;
+        int clear = DataManager.instance.leveldata.levellist[mylevel - 1].clear;
 
         slider.maxValue = total;
         slider.value = clear;
@@ -42,6 +40,7 @@ public class LevelBtn : MonoBehaviour
     public void SelectThisLevel()
     {
         DataManager.instance.selectedLevel = mylevel;
+        DataManager.instance.LoadStageData();
         homeManager.ActiveStageList();
     }
 }

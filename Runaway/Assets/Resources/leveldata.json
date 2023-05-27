@@ -1,0 +1,23 @@
+{
+    "version": "1.0.2",
+    "levellist":[
+        {
+            "level": 1,
+            "title": "turtle",
+            "total": 4,
+            "clear": 0
+        },
+        {
+            "level": 2,
+            "title": "cat",
+            "total": 4,
+            "clear": 0
+        },
+        {
+            "level": 3,
+            "title": "eagle",
+            "total": 4,
+            "clear": 0
+        }
+    ]
+}

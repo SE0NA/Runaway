@@ -30,7 +30,7 @@ public class HomeManager : MonoBehaviour
 
     void Awake()
     {
-        DataManager.instance.LoadStageData();
+        DataManager.instance.LoadLevelData();
     }
 
     private void Start()
@@ -45,7 +45,7 @@ public class HomeManager : MonoBehaviour
 
     void SettingLevelList()
     {
-        foreach(Level l in DataManager.instance.stagedata.levellist){
+        foreach(Level l in DataManager.instance.leveldata.levellist){
             GameObject newLevelBtn = Instantiate<GameObject>(obj_prf_levelbtn, trans_level_content);
             newLevelBtn.GetComponent<LevelBtn>().Init(l.level, l.title, this);
         }
@@ -79,8 +79,8 @@ public class HomeManager : MonoBehaviour
 
         obj_start.SetActive(false);
         obj_levelList.SetActive(false);
-        obj_stageList.GetComponent<HomeListManager>().SettingStageList(DataManager.instance.selectedLevel);
         obj_stageList.SetActive(true);
+        obj_stageList.GetComponent<HomeListManager>().SettingStageList();
         obj_set.SetActive(false);
     }
 

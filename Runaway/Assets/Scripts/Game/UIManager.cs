@@ -38,7 +38,7 @@ public class UIManager : MonoBehaviour
         player = FindObjectOfType<Player>();
 
         // 다음 레벨이 없으면 다음 스테이지 버튼 제거
-        if (DataManager.instance.selectedStage == DataManager.instance.stagedata.levellist[DataManager.instance.selectedLevel - 1].stagelist.Length)
+        if (DataManager.instance.selectedStage >= DataManager.instance.stagedata.stagelist.Length)
             Destroy(btn_next);
 
         audioSource = GetComponent<AudioSource>();

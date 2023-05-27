@@ -3,23 +3,17 @@ using System.Collections.Generic;
 using System;
 
 [Serializable]
-public struct Level
-{
-    public int level;
-    public string title;
-    public Stage[] stagelist;
-}
-[Serializable]
 public struct Stage
 {
     public int stageNo;
     public bool clear;
-    public bool unLock;
     public int[] blocks;
 }
 
 [Serializable]
-public class StageData {
+public class StageData
+{
     public string version;
-    public Level[] levellist;
+    public int level;
+    public Stage[] stagelist;
 }

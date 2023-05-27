@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
         else if (now_level == 3) { row = 5; col = 3; cam.transform.position = new Vector3(0f, 15f, 7.5f); goalbuilding.transform.position = new Vector3(0, -2f, 23.2f); }
 
         // 블럭 설치
-        int[] blockdesign = DataManager.instance.stagedata.levellist[now_level - 1].stagelist[now_stage - 1].blocks;
+        int[] blockdesign = DataManager.instance.stagedata.stagelist[now_stage-1].blocks;
         int indexblock = 0;
         for (int i = 0; i < row; i++)
             for (int j = 0; j < col; j++)
@@ -100,10 +100,12 @@ public class GameManager : MonoBehaviour
         else
         {
             // 플레이어 생존, 블럭 모두 제거 -> 게임 클리어
-            DataManager.instance.stagedata.levellist[now_level - 1].stagelist[now_stage - 1].clear = true;
-            if (now_stage != DataManager.instance.stagedata.levellist[now_level - 1].stagelist.Length)
-                DataManager.instance.stagedata.levellist[now_level - 1].stagelist[now_stage].unLock = true;
+            DataManager.instance.stagedata.stagelist[now_stage-1].clear = true;
+        //    if (now_stage < DataManager.instance.stagedata.stagelist.Length)
+        //        DataManager.instance.stagedata.stagelist[now_stage].unLock = true;
 
+            DataManager.instance.leveldata.levellist[now_level - 1].clear++;
+            DataManager.instance.SaveLevelData();
             DataManager.instance.SaveStageData();
 
             res = Result.clear;
