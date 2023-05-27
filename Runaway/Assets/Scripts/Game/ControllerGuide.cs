@@ -6,11 +6,13 @@ public class ControllerGuide : MonoBehaviour
 {
     Animator anim;
     Player player;
+    UIManager uimanager;
 
     private void Start()
     {
         anim = GetComponent<Animator>();
         player = FindObjectOfType<Player>();
+        uimanager = FindObjectOfType<UIManager>();
 
         anim.Play("Blink");
     }
@@ -18,6 +20,8 @@ public class ControllerGuide : MonoBehaviour
     private void Update()
     {
         if (player.isMoved)
+            Destroy(gameObject);
+        if (uimanager.activeMenu)
             Destroy(gameObject);
     }
 }

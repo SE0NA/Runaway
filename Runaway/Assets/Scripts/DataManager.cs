@@ -27,10 +27,15 @@ public class DataManager : MonoBehaviour
         }
     }
 
+    // Gamedata ///////////
+    public bool isHaptic = true;
+
+
     // StageData ////////////////////////////////////////////////////////////
 
     string stageDataFileName = "stagedata";
     public StageData stagedata = new StageData();
+
 
     public void LoadStageData()
     {

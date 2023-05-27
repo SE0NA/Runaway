@@ -16,8 +16,7 @@ public class HomeManager : MonoBehaviour
     [SerializeField] GameObject obj_delete;
 
     [Header("Setting")]
-    [SerializeField] Slider slider_bgm;
-    [SerializeField] Slider slider_sfx;
+    [SerializeField] Slider slider_volume;
     [SerializeField] Toggle toggle_haptic;
 
     [Header("LevelList")]
@@ -27,6 +26,7 @@ public class HomeManager : MonoBehaviour
     [Header("Sound")]
     [SerializeField] AudioClip audioclip_btn;
     AudioSource audioSource;
+    [SerializeField] AudioMixer mixer;
 
     void Awake()
     {
@@ -38,6 +38,9 @@ public class HomeManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         audioSource.playOnAwake = false;
         SettingLevelList();
+
+        DataManager.instance.isHaptic = PlayerPrefs.GetFloat("haptic", 1) == 1 ? true : false;
+        mixer.SetFloat("sfx", PlayerPrefs.GetFloat("sfx", -20f));
     }
 
     void SettingLevelList()
@@ -93,8 +96,7 @@ public class HomeManager : MonoBehaviour
     void SettingWithSet()
     {
         // º¼·ý
-        slider_bgm.value = PlayerPrefs.GetFloat("BGM", -20f);
-        slider_sfx.value = PlayerPrefs.GetFloat("SFX", -20f);
+        slider_volume.value = PlayerPrefs.GetFloat("sfx", -20f);
         toggle_haptic.isOn = PlayerPrefs.GetInt("haptic", 1) == 1 ? true : false;
     }
 
@@ -110,8 +112,7 @@ public class HomeManager : MonoBehaviour
 
     public void SavePlayerPrefs()
     {
-        PlayerPrefs.SetFloat("BGM", slider_bgm.value);
-        PlayerPrefs.SetFloat("SFX", slider_sfx.value);
+        PlayerPrefs.SetFloat("sfx", slider_volume.value);
         PlayerPrefs.SetInt("haptic", toggle_haptic.isOn ? 1 : 0);
     }
 
@@ -136,24 +137,18 @@ public class HomeManager : MonoBehaviour
         DataManager.instance.FileDelete();
 
         SettingWithSet();   // slider playerprefs ÃÊ±âÈ­ ¸ÂÃã
-        AudioManager.instance.SetBGMVolume(slider_bgm.value);
-        AudioManager.instance.SetSFXVolume(slider_sfx.value);
-        AudioManager.instance.SetHaptic(toggle_haptic.isOn);
 
         SceneManager.LoadScene("Home");
     }
 
-    public void Slider_Set_BGM()
-    {
-        AudioManager.instance.SetBGMVolume(slider_bgm.value);
-    }
     public void Slider_Set_SFX()
     {
-        AudioManager.instance.SetSFXVolume(slider_sfx.value);
+        if (slider_volume.value < -40f) mixer.SetFloat("sfx", -80f);
+        else    mixer.SetFloat("sfx", slider_volume.value);
     }
     public void Toggle_Set_Haptic()
     {
-        AudioManager.instance.SetHaptic(toggle_haptic.isOn);
+        DataManager.instance.isHaptic = toggle_haptic.isOn;
     }
 
 

@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject ui_failed;
 
     [SerializeField] GameObject btn_next;
+    [SerializeField] TextMeshProUGUI txt_paused_stage;
     [SerializeField] TextMeshProUGUI txt_clear_stage;
     [SerializeField] TextMeshProUGUI txt_failed_stage;
     [SerializeField] TextMeshProUGUI txt_failed_reason;
@@ -44,6 +45,7 @@ public class UIManager : MonoBehaviour
         audioSource.playOnAwake = false;
 
         string str_stage = DataManager.instance.selectedLevel.ToString() + " - " + DataManager.instance.selectedStage.ToString();
+        txt_paused_stage.text = str_stage;
         txt_clear_stage.text = str_stage;
         txt_failed_stage.text = str_stage;
     }

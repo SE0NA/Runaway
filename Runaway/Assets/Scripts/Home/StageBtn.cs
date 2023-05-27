@@ -12,9 +12,9 @@ public class StageBtn : MonoBehaviour
     Image img_back;
     Button this_btn;
 
-    [SerializeField] Color color_clear;
-    [SerializeField] Color color_unlock;
-    [SerializeField] Color color_lock;
+    [SerializeField] List<Sprite> sprite_clear;
+    [SerializeField] List<Sprite> sprite_unlock;
+    [SerializeField] List<Sprite> sprite_lock;
 
     public void InitBtn(int stageNo, bool isClear, bool unLock)
     {
@@ -25,16 +25,26 @@ public class StageBtn : MonoBehaviour
         this.stageNo = stageNo;
         txt_no.text = stageNo.ToString();
 
+        SpriteState spritestate = new SpriteState();
+        spritestate = this_btn.spriteState;
+
         if (isClear)
-            img_back.color = color_clear;
+        {
+            img_back.sprite = sprite_clear[0];
+            spritestate.pressedSprite = sprite_clear[1];
+        }
         else if (unLock)
-            img_back.color = color_unlock;
+        {
+            img_back.sprite = sprite_unlock[0];
+            spritestate.pressedSprite = sprite_unlock[1];
+        }
         else
         {
-            img_back.color = color_lock;
             this_btn.interactable = false;
+            img_back.sprite = sprite_lock[0];
+            spritestate.pressedSprite = sprite_lock[1];
         }
-
+        this_btn.spriteState = spritestate;
     }
 
     public void StartThisStage()

@@ -387,7 +387,6 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Utilities.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UtilitiesEditor.ref.dll"
-"Assets/Scripts/AudioManager.cs"
 "Assets/Scripts/Crypto.cs"
 "Assets/Scripts/DataManager.cs"
 "Assets/Scripts/Game/Block.cs"
