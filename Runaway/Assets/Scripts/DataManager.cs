@@ -32,6 +32,7 @@ public class DataManager : MonoBehaviour
 
     // Gamedata ///////////
     public bool isHaptic = true;
+    public int restPlay = 1;
 
 
     // LevelData ////////////////////////////////////////////////////////////
@@ -120,7 +121,6 @@ public class DataManager : MonoBehaviour
 
             stagedata = JsonUtility.FromJson<StageData>(fromJsonData);
 
-            Debug.Log(fromJsonData);
             Debug.Log(stagedata.level + " 불러오기 성공!");
         }
         else
@@ -131,8 +131,6 @@ public class DataManager : MonoBehaviour
             SaveStageData();
             Debug.Log(stageDataFileName + " 파일을 찾을 수 없음! 새로운 파일을 Resources로부터 생성");
         }
-        GetRestHeart();
-
     }
 
 
@@ -195,28 +193,16 @@ public class DataManager : MonoBehaviour
         Debug.Log("게임 데이터 초기화 완료!");
     }
 
-
-    public void GetRestHeart()
+    public void ReduceRestPlay()
     {
-        string data = PlayerPrefs.GetString("restdata","0");
-        if (data.Equals("0"))   // 파일 없었음
-        {
-            SetRestHeart(3);
-            ReplayBtn.rest = 3;
-        }
-        else
-        {
-            int rest = Int32.Parse(Crypto.AESDecrypt128(data));
-            Debug.Log("남은 replay: " + rest);
-
-            if (rest > 3) rest = 3;
-
-            ReplayBtn.rest = rest;
-        }
+        restPlay--;
+        PlayerPrefs.SetInt("restPlay", restPlay);
     }
-    public void SetRestHeart(int rest)
+    public void ChargeRestPlay()
     {
-        string data = Crypto.AESEncrypt128(rest.ToString());
-        PlayerPrefs.SetString("restdata", data);
+        Debug.Log("DataManager:ChargeRestPlay - Ads");
+
+        restPlay = 3;
+        PlayerPrefs.SetInt("restPlay", restPlay);
     }
 }

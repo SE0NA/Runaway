@@ -29,7 +29,6 @@ public class LevelBtn : MonoBehaviour
 
     void SettingSlider()
     {
-
         int total = DataManager.instance.leveldata.levellist[mylevel - 1].total;
         int clear = DataManager.instance.leveldata.levellist[mylevel - 1].clear;
 

@@ -40,6 +40,8 @@ public class HomeManager : MonoBehaviour
         SettingLevelList();
 
         DataManager.instance.isHaptic = PlayerPrefs.GetFloat("haptic", 1) == 1 ? true : false;
+        DataManager.instance.restPlay = PlayerPrefs.GetInt("restPlay", 3);
+
         mixer.SetFloat("sfx", PlayerPrefs.GetFloat("sfx", -20f));
     }
 

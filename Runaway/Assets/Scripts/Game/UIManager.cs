@@ -83,14 +83,27 @@ public class UIManager : MonoBehaviour
     {
         audioSource.PlayOneShot(clip_btn);
 
-        DataManager.instance.selectedStage++;
-        SceneManager.LoadScene("Game");
+        if (DataManager.instance.restPlay > 0)
+        {
+            DataManager.instance.ReduceRestPlay();
+            DataManager.instance.selectedStage++;
+            SceneManager.LoadScene("Game");
+        }
+        else
+        {
+            DataManager.instance.ChargeRestPlay();
+        }
     }
 
     public void ActiveResult(GameManager.Result result)
     {
         activeMenu = true;
-        Handheld.Vibrate(); // 진동
+
+        if (DataManager.instance.isHaptic)
+        {
+            Handheld.Vibrate();
+            Debug.Log("UIManager:ActiveResult - 진동");
+        }
 
         if (result == GameManager.Result.clear)
         {

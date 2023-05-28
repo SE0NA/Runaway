@@ -100,14 +100,11 @@ public class GameManager : MonoBehaviour
         else
         {
             // 플레이어 생존, 블럭 모두 제거 -> 게임 클리어
-            DataManager.instance.stagedata.stagelist[now_stage-1].clear = true;
-        //    if (now_stage < DataManager.instance.stagedata.stagelist.Length)
-        //        DataManager.instance.stagedata.stagelist[now_stage].unLock = true;
-
+            DataManager.instance.stagedata.stagelist[now_stage - 1].clear = true;
+            DataManager.instance.SaveStageData();
             DataManager.instance.leveldata.levellist[now_level - 1].clear++;
             DataManager.instance.SaveLevelData();
-            DataManager.instance.SaveStageData();
-
+            
             res = Result.clear;
         }
 
