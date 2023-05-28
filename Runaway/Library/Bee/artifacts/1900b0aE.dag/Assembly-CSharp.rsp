@@ -401,6 +401,7 @@
 "Assets/Scripts/Home/HomeManager.cs"
 "Assets/Scripts/Home/LevelBtn.cs"
 "Assets/Scripts/Home/StageBtn.cs"
+"Assets/Scripts/Home/StartMotion.cs"
 "Assets/Scripts/LevelData.cs"
 "Assets/Scripts/StageData.cs"
 "Assets/Simple Scroll-Snap/Examples/Example 1 (macOS Finder)/Scripts/FileUI.cs"
