@@ -8,7 +8,7 @@ public class StartMotion : MonoBehaviour
 {
     [Header("Game Objects")]
     public Image img_fade;
-    public GameObject img_title;
+    public Image img_title;
     public GameObject camera;
     public List<Button> btn_start;
     public TextMeshProUGUI txt_start;
@@ -57,6 +57,15 @@ public class StartMotion : MonoBehaviour
             yield return null;
         }
 
+        // Title fade
+        fadeCount = 0f;
+        while (fadeCount < 1.0f)
+        {
+            fadeCount += 0.05f;
+            img_title.color = new Color(1f, 1f, 1f, fadeCount);
+            yield return new WaitForSeconds(0.01f);
+        }
+
         // Btn fade
         fadeCount = 0f;
         while(fadeCount < 1.0f)
@@ -64,8 +73,8 @@ public class StartMotion : MonoBehaviour
             fadeCount += 0.05f;
             yield return new WaitForSeconds(0.01f);
 
-            btn_start[0].image.color = new Color(btn_start[0].image.color.r, btn_start[0].image.color.g, btn_start[0].image.color.b, fadeCount);
-            btn_start[1].image.color = new Color(btn_start[1].image.color.r, btn_start[1].image.color.g, btn_start[1].image.color.b, fadeCount);
+            btn_start[0].image.color = new Color(1f, 1f, 1f, fadeCount);
+            btn_start[1].image.color = new Color(1f, 1f, 1f, fadeCount);
             txt_start.color = new Color(txt_start.color.r, txt_start.color.g, txt_start.color.b, fadeCount);
             img_set.color = new Color(img_set.color.r, img_set.color.g, img_set.color.b, fadeCount);
         }
