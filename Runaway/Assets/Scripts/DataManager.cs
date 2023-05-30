@@ -32,6 +32,7 @@ public class DataManager : MonoBehaviour
 
     // Gamedata ///////////
     public bool isHaptic = true;
+    public bool isNumbering = true;
     public int restPlay = 1;
 
 

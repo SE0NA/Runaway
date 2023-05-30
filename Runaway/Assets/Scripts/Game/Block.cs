@@ -36,8 +36,11 @@ public class Block : MonoBehaviour
     // 블럭의 상태를 색, 텍스트로 표시
     void ChangeBlockSet()
     {
+        // Material
         gameObject.GetComponent<MeshRenderer>().material = block_mat[restcount];
-        if (restcount > 0)
+
+        // Text
+        if (DataManager.instance.isNumbering && restcount > 0)
         {
             txt_count.text = restcount.ToString();
             txt_count.color = txtcolors[restcount];

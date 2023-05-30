@@ -20,6 +20,7 @@ public class HomeManager : MonoBehaviour
     [Header("Setting")]
     [SerializeField] Slider slider_volume;
     [SerializeField] Toggle toggle_haptic;
+    [SerializeField] Toggle toggle_numbering;
 
     [Header("LevelList")]
     [SerializeField] GameObject obj_prf_levelbtn;
@@ -45,7 +46,8 @@ public class HomeManager : MonoBehaviour
         SettingLevelList();
 
 
-        DataManager.instance.isHaptic = PlayerPrefs.GetFloat("haptic", 1) == 1 ? true : false;
+        DataManager.instance.isHaptic = PlayerPrefs.GetInt("haptic", 1) == 1 ? true : false;
+        DataManager.instance.isNumbering = PlayerPrefs.GetInt("numbering", 1) == 1 ? true : false;
         DataManager.instance.restPlay = PlayerPrefs.GetInt("restPlay", 3);
 
         mixer.SetFloat("sfx", PlayerPrefs.GetFloat("sfx", -20f));
@@ -141,6 +143,7 @@ public class HomeManager : MonoBehaviour
         // º¼·ý
         slider_volume.value = PlayerPrefs.GetFloat("sfx", -20f);
         toggle_haptic.isOn = PlayerPrefs.GetInt("haptic", 1) == 1 ? true : false;
+        toggle_numbering.isOn = PlayerPrefs.GetInt("numbering", 1) == 1 ? true : false;
     }
 
     public void CloseSetting()
@@ -157,6 +160,7 @@ public class HomeManager : MonoBehaviour
     {
         PlayerPrefs.SetFloat("sfx", slider_volume.value);
         PlayerPrefs.SetInt("haptic", toggle_haptic.isOn ? 1 : 0);
+        PlayerPrefs.SetInt("numbering", toggle_numbering.isOn ? 1 : 0);
     }
 
     public void ActiveDeletePop()
@@ -194,5 +198,9 @@ public class HomeManager : MonoBehaviour
         DataManager.instance.isHaptic = toggle_haptic.isOn;
     }
 
+    public void Toggle_Set_Numbering()
+    {
+        DataManager.instance.isNumbering = toggle_numbering.isOn;
+    }
 
 }
