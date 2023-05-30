@@ -10,6 +10,7 @@ using UnityEngine.UI;
 public class HomeManager : MonoBehaviour
 {
     [Header("Panel")]
+    [SerializeField] GameObject obj_title;
     [SerializeField] GameObject obj_start;
     [SerializeField] GameObject obj_levelList;
     [SerializeField] GameObject obj_stageList;
@@ -70,6 +71,7 @@ public class HomeManager : MonoBehaviour
     {
         PlayBtnAudio();
 
+        obj_title.SetActive(true);
         obj_start.SetActive(false);
         obj_levelList.SetActive(true);
         obj_stageList.SetActive(false);
@@ -89,6 +91,7 @@ public class HomeManager : MonoBehaviour
         PlayBtnAudio();
         SetPlayTimeTxt();
 
+        obj_title.SetActive(false);
         obj_start.SetActive(false);
         obj_levelList.SetActive(false);
         obj_stageList.SetActive(true);
@@ -190,7 +193,7 @@ public class HomeManager : MonoBehaviour
 
     public void Slider_Set_SFX()
     {
-        if (slider_volume.value < -40f) mixer.SetFloat("sfx", -80f);
+        if (slider_volume.value <= -40f) mixer.SetFloat("sfx", -80f);
         else    mixer.SetFloat("sfx", slider_volume.value);
     }
     public void Toggle_Set_Haptic()

@@ -379,6 +379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e093df545bf5f743ab44aae7841efb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  obj_title: {fileID: 94852626}
   obj_start: {fileID: 623691384}
   obj_levelList: {fileID: 1052206905}
   obj_stageList: {fileID: 2030222917}
