@@ -120,6 +120,12 @@
 -define:ENABLE_LEGACY_INPUT_MANAGER
 -define:CSHARP_7_OR_LATER
 -define:CSHARP_7_3_OR_NEWER
+-r:"Assets/GoogleMobileAds/GoogleMobileAds.Common.dll"
+-r:"Assets/GoogleMobileAds/GoogleMobileAds.Core.dll"
+-r:"Assets/GoogleMobileAds/GoogleMobileAds.dll"
+-r:"Assets/GoogleMobileAds/GoogleMobileAds.Ump.dll"
+-r:"Assets/GoogleMobileAds/GoogleMobileAds.Ump.Unity.dll"
+-r:"Assets/GoogleMobileAds/GoogleMobileAds.Unity.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2021.3.14f1/Editor/Data/Managed/UnityEngine/UnityEditor.CoreModule.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2021.3.14f1/Editor/Data/Managed/UnityEngine/UnityEditor.DeviceSimulatorModule.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2021.3.14f1/Editor/Data/Managed/UnityEngine/UnityEditor.DiagnosticsModule.dll"
@@ -336,6 +342,7 @@
 -r:"D:/game/Runaway/Runaway/Library/PackageCache/com.unity.nuget.newtonsoft-json@3.0.2/Runtime/Newtonsoft.Json.dll"
 -r:"D:/game/Runaway/Runaway/Library/PackageCache/com.unity.visualscripting@1.7.8/Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/CopyrightNoticeEditor.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/GoogleMobileAds.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/SimpleInspectorAttributes.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/SimpleInspectorAttributesEditor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/SimpleScrollSnap.ref.dll"
@@ -387,6 +394,7 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Utilities.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UtilitiesEditor.ref.dll"
+"Assets/Scripts/AdManager.cs"
 "Assets/Scripts/Crypto.cs"
 "Assets/Scripts/DataManager.cs"
 "Assets/Scripts/Game/Block.cs"

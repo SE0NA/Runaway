@@ -55,11 +55,18 @@ public class StageBtn : MonoBehaviour
         
         if(DataManager.instance.restPlay <= 0)
         {
-            Debug.Log("stageBtn");
-            DataManager.instance.ChargeRestPlay();
+            bool reward = FindObjectOfType<AdManager>().ShowAd();
+            if (reward)
+            {
+                DataManager.instance.ReduceRestPlay();
+                SceneManager.LoadScene("Game");
+            }
         }
-        DataManager.instance.ReduceRestPlay();
+        else
+        {
+            DataManager.instance.ReduceRestPlay();
 
-        SceneManager.LoadScene("Game");
+            SceneManager.LoadScene("Game");
+        }
     }
 }
