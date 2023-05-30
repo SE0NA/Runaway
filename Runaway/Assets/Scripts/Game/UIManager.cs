@@ -10,6 +10,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject ui_set2;
     [SerializeField] GameObject ui_clear;
     [SerializeField] GameObject ui_failed;
+    [SerializeField] GameObject ui_charge;
+
+    [SerializeField] List<ReplayBtn> list_replaybtn;
 
     [SerializeField] GameObject btn_next;
     [SerializeField] TextMeshProUGUI txt_paused_stage;
@@ -34,6 +37,7 @@ public class UIManager : MonoBehaviour
         ui_set2.SetActive(false);
         ui_clear.SetActive(false);
         ui_failed.SetActive(false);
+        ui_charge.SetActive(false);
 
         player = FindObjectOfType<Player>();
 
@@ -93,6 +97,29 @@ public class UIManager : MonoBehaviour
         {
             DataManager.instance.ChargeRestPlay();
         }
+    }
+
+    public void ActiveCharge()
+    {
+        ui_set2.SetActive(false);
+        ui_charge.SetActive(true);
+    }
+    public void CloseCharge()
+    {
+        ui_charge.SetActive(false);
+        ui_set2.SetActive(true);
+    }
+    public void Click_ChargeBtn()
+    {
+        FindObjectOfType<AdManager>().ShowAd();
+    }
+    public void FinishAd()
+    {
+        foreach(ReplayBtn btn in list_replaybtn)
+        {
+            btn.SettingHeart();
+        }
+        CloseCharge();
     }
 
     public void ActiveResult(GameManager.Result result)

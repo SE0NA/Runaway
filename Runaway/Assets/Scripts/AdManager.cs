@@ -7,22 +7,29 @@ using UnityEngine.SceneManagement;
 
 public class AdManager : MonoBehaviour
 {
+    private static AdManager instance = null;
     private string _adUnitID = "ca-app-pub-3940256099942544/5224354917"; // 테스트 리워드 
     private RewardedAd rewardedAd;
 
     [Header("GameObject")]
     [SerializeField] GameObject obj_toast;
 
-
     public void Start()
-    {   
-        // Initialize the Google Mobile Ads SDK
-        MobileAds.Initialize((InitializationStatus initStatus) =>
+    {   if (instance == null)
         {
-            // This callback is called once the MobileAds SDK is initialized.
-        });
+            // Initialize the Google Mobile Ads SDK
+            MobileAds.Initialize((InitializationStatus initStatus) =>
+            {
+                // This callback is called once the MobileAds SDK is initialized.
+            });
 
-        LoadAd();
+            LoadAd();
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(this);
+        }
     }
 
 
@@ -72,6 +79,10 @@ public class AdManager : MonoBehaviour
                 if (SceneManager.GetActiveScene().name == "Home")
                 {
                     FindObjectOfType<HomeManager>().FinishAd();
+                }
+                else if(SceneManager.GetActiveScene().name == "Game")
+                {
+                    FindObjectOfType<UIManager>().FinishAd();
                 }
 
                 // 광고 미리 로드

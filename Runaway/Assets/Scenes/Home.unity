@@ -5257,7 +5257,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "You can charge hearts \nby viewing ads."
+  m_text: 'You can recharge your hearts
+
+    by watching an ad!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7955b4ff5d366944383017e3ccb506f6, type: 2}
   m_sharedMaterial: {fileID: -7722334180838135256, guid: 7955b4ff5d366944383017e3ccb506f6,

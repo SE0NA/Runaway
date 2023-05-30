@@ -28,11 +28,6 @@ public class GameManager : MonoBehaviour
     Player player;
 
 
-    private void Awake()
-    {
-        DataManager.instance.LoadStageData();
-    }
-
     void Start()
     {
         now_level = DataManager.instance.selectedLevel;
