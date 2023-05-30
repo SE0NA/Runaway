@@ -578,3 +578,6 @@ MonoBehaviour:
   - {fileID: 4227664435897231294}
   - {fileID: 3640354128914921808}
   color_rest: {r: 1, g: 0.514151, b: 0.514151, a: 1}
+  obj_btn_img: {fileID: 1394880016722877021}
+  img_ad: {fileID: 21300000, guid: 2d4764846906b4a4a9009b9ce17878a0, type: 3}
+  img_replay: {fileID: 21300000, guid: 3cad1e94ebe04f540a77021a5186a890, type: 3}
