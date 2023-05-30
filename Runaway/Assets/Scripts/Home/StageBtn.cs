@@ -55,12 +55,7 @@ public class StageBtn : MonoBehaviour
         
         if(DataManager.instance.restPlay <= 0)
         {
-            bool reward = FindObjectOfType<AdManager>().ShowAd();
-            if (reward)
-            {
-                DataManager.instance.ReduceRestPlay();
-                SceneManager.LoadScene("Game");
-            }
+            FindObjectOfType<HomeManager>().ShowChargePanel();
         }
         else
         {

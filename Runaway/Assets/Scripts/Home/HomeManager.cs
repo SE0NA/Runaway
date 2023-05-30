@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -14,6 +15,7 @@ public class HomeManager : MonoBehaviour
     [SerializeField] GameObject obj_stageList;
     [SerializeField] GameObject obj_set;
     [SerializeField] GameObject obj_delete;
+    [SerializeField] GameObject obj_charge;
 
     [Header("Setting")]
     [SerializeField] Slider slider_volume;
@@ -22,6 +24,9 @@ public class HomeManager : MonoBehaviour
     [Header("LevelList")]
     [SerializeField] GameObject obj_prf_levelbtn;
     [SerializeField] Transform trans_level_content;
+
+    [Header("StageList")]
+    [SerializeField] TextMeshProUGUI txt_btn_play_time;
 
     [Header("Sound")]
     [SerializeField] AudioClip audioclip_btn;
@@ -38,6 +43,7 @@ public class HomeManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         audioSource.playOnAwake = false;
         SettingLevelList();
+
 
         DataManager.instance.isHaptic = PlayerPrefs.GetFloat("haptic", 1) == 1 ? true : false;
         DataManager.instance.restPlay = PlayerPrefs.GetInt("restPlay", 3);
@@ -66,6 +72,7 @@ public class HomeManager : MonoBehaviour
         obj_levelList.SetActive(true);
         obj_stageList.SetActive(false);
         obj_set.SetActive(false);
+        obj_charge.SetActive(false);
     }
     public void BackFromLevelList()
     {
@@ -78,12 +85,46 @@ public class HomeManager : MonoBehaviour
     public void ActiveStageList()
     {
         PlayBtnAudio();
+        SetPlayTimeTxt();
 
         obj_start.SetActive(false);
         obj_levelList.SetActive(false);
         obj_stageList.SetActive(true);
         obj_stageList.GetComponent<HomeListManager>().SettingStageList();
         obj_set.SetActive(false);
+    }
+
+    public void SetPlayTimeTxt()
+    {
+        txt_btn_play_time.text = DataManager.instance.restPlay.ToString();
+        if (DataManager.instance.restPlay <= 0)
+            txt_btn_play_time.color = Color.red;
+        else
+            txt_btn_play_time.color = Color.black;
+    }
+    public void ShowChargePanel()
+    {
+        if (DataManager.instance.restPlay <= 0)
+        {
+            obj_stageList.SetActive(false);
+            obj_charge.SetActive(true);
+        }
+    }
+    public void BtnCharge()
+    {
+        // ±¤°í Àç»ý
+        FindObjectOfType<AdManager>().ShowAd();
+    }
+    public void FinishAd()
+    {
+        SetPlayTimeTxt();
+        CloseChargePanel();
+    }
+
+    public void CloseChargePanel()
+    {
+        obj_charge.SetActive(false);
+        obj_stageList.SetActive(true);
     }
 
     public void ActiveSetting()
