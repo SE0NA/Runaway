@@ -5,22 +5,107 @@
         {
             "stageNo": 1,
             "clear" : false,
-            "blocks": [0,1,0,0,2,0,0,2,0,0,1,0]
+            "blocks": [0,1,0,1,1,0,1,1,0,0,1,0]
         },
         {
             "stageNo": 2,
             "clear" : false,
-            "blocks": [0,1,0,1,1,0,1,1,0,0,1,0]
+            "blocks": [0,1,0,0,2,0,0,2,0,0,1,0]
         },
         {
             "stageNo": 3,
             "clear" : false,
-            "blocks": [0,1,1,0,1,0,0,1,0,2,2]
+            "blocks": [1,1,0,0,1,1,1,2,1,0,1,0]
         },
         {
             "stageNo": 4,
             "clear" : false,
-            "blocks": [1,2,1,1,1,1,1,0,0,2,2,2]
+            "blocks": [0,1,0,1,2,1,1,2,1,0,1,0]
+        },
+        {
+            "stageNo": 5,
+            "clear" : false,
+            "blocks": [1,0,1,2,2,2,0,1,2,0,0,1]
+        },
+        {
+            "stageNo": 6,
+            "clear" : false,
+            "blocks": [0,2,2,0,2,2,2,2,0,2,2,0]
+        },
+        {
+            "stageNo": 7,
+            "clear" : false,
+            "blocks": [1,2,1,2,1,0,3,1,0,2,2,1]
+        },
+        {
+            "stageNo": 8,
+            "clear" : false,
+            "blocks": [0,2,2,1,2,1,1,2,1,1,2,1]
+        },
+        {
+            "stageNo": 9,
+            "clear" : false,
+            "blocks": [1,2,1,1,2,1,1,2,1,1,3,1]
+        },
+        {
+            "stageNo": 10,
+            "clear" : false,
+            "blocks": [0,1,1,2,3,1,1,1,0,1,2,0]
+        },
+        {
+            "stageNo": 11,
+            "clear" : false,
+            "blocks": [2,2,2,1,1,1,2,2,2,1,1,1]
+        },
+        {
+            "stageNo": 12,
+            "clear" : false,
+            "blocks": [0,0,1,1,2,2,1,2,3,1,0,1]
+        },
+        {
+            "stageNo": 13,
+            "clear" : false,
+            "blocks": [1,2,0,0,2,1,1,2,0,0,2,1]
+        },
+        {
+            "stageNo": 14,
+            "clear" : false,
+            "blocks": [0,1,0,2,2,1,2,1,2,1,0,1]
+        },
+        {
+            "stageNo": 15,
+            "clear" : false,
+            "blocks": [1,2,1,0,2,1,0,1,2,1,1,2]
+        },
+        {
+            "stageNo": 16,
+            "clear" : false,
+            "blocks": [1,1,1,1,2,2,0,2,2,0,2,1]
+        },
+        {
+            "stageNo": 17,
+            "clear" : false,
+            "blocks": [1,0,1,1,2,1,1,3,1,0,1,0]
+        },
+        {
+            "stageNo": 18,
+            "clear" : false,
+            "blocks": [0,1,0,2,3,2,2,1,2,2,2,2]
+        },
+        {
+            "stageNo": 19,
+            "clear" : false,
+            "blocks": [2,2,2,1,0,1,2,1,2,2,2,2]
+        },
+        {
+            "stageNo": 20,
+            "clear" : false,
+            "blocks": [0,2,2,1,1,2,3,3,2,2,1,0]
+        },
+        {
+            "stageNo": 21,
+            "clear" : false,
+            "blocks": [0,0,1,1,3,3,1,3,3,0,2,2]
         }
     ]
 }

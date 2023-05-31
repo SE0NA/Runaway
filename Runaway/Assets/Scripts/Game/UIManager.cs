@@ -10,15 +10,17 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject ui_set2;
     [SerializeField] GameObject ui_clear;
     [SerializeField] GameObject ui_failed;
+    [SerializeField] GameObject btn_charge;
     [SerializeField] GameObject ui_charge;
 
-    [SerializeField] List<ReplayBtn> list_replaybtn;
+    [SerializeField] List<GameObject> list_extra_next_btn;
 
     [SerializeField] GameObject btn_next;
     [SerializeField] TextMeshProUGUI txt_paused_stage;
     [SerializeField] TextMeshProUGUI txt_clear_stage;
     [SerializeField] TextMeshProUGUI txt_failed_stage;
     [SerializeField] TextMeshProUGUI txt_failed_reason;
+    [SerializeField] TextMeshProUGUI txt_playtime;
 
     [Header("AudioClips")]
     [SerializeField] AudioClip clip_menu;
@@ -30,6 +32,8 @@ public class UIManager : MonoBehaviour
     Player player;
     AudioSource audioSource;
 
+    enum State { pause, failed, clear}
+    State thisState;
 
     void Start()
     {
@@ -37,6 +41,7 @@ public class UIManager : MonoBehaviour
         ui_set2.SetActive(false);
         ui_clear.SetActive(false);
         ui_failed.SetActive(false);
+        btn_charge.SetActive(false);
         ui_charge.SetActive(false);
 
         player = FindObjectOfType<Player>();
@@ -52,6 +57,11 @@ public class UIManager : MonoBehaviour
         txt_paused_stage.text = str_stage;
         txt_clear_stage.text = str_stage;
         txt_failed_stage.text = str_stage;
+        txt_playtime.text = DataManager.instance.restPlay.ToString();
+
+        if (!DataManager.instance.stagedata.stagelist[DataManager.instance.selectedStage - 1].clear)
+            foreach (GameObject btn in list_extra_next_btn)
+                Destroy(btn);
     }
 
     public void Click_Menu()
@@ -62,18 +72,37 @@ public class UIManager : MonoBehaviour
 
             ui_set1.SetActive(false);
             activeMenu = true;
+            btn_charge.SetActive(true);
             ui_set2.SetActive(true);
+            ui_clear.SetActive(false);
+            ui_failed.SetActive(false);
+            ui_charge.SetActive(false);
+
+            thisState = State.pause;
         }
     }
 
     public void Click_Close_Set2()
     {
         audioSource.PlayOneShot(clip_btn);
+        btn_charge.SetActive(false);
         ui_set2.SetActive(false);
         activeMenu = false;
         ui_set1.SetActive(true);
+        ui_clear.SetActive(false);
+        ui_failed.SetActive(false);
+        ui_charge.SetActive(false);
 
         // 게임 UI 실행
+    }
+
+    public void Click_PlayTimeBtn()
+    {
+        audioSource.PlayOneShot(clip_btn);
+        if (DataManager.instance.restPlay <= 0)
+        {
+            ActiveCharge();
+        }
     }
 
     public void Click_Home()
@@ -81,6 +110,18 @@ public class UIManager : MonoBehaviour
         audioSource.PlayOneShot(clip_btn);
 
         SceneManager.LoadScene("Home");
+    }
+    public void Click_Replay()
+    {
+        if(DataManager.instance.restPlay > 0)
+        {
+            DataManager.instance.ReduceRestPlay();
+            SceneManager.LoadScene("Game");
+        }
+        else
+        {
+            ActiveCharge();
+        }
     }
 
     public void Click_Next()
@@ -95,19 +136,43 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            DataManager.instance.ChargeRestPlay();
+            ActiveCharge();
         }
     }
 
     public void ActiveCharge()
     {
+        ui_set1.SetActive(false);
         ui_set2.SetActive(false);
+        ui_clear.SetActive(false);
+        ui_failed.SetActive(false);
+        btn_charge.SetActive(false);
         ui_charge.SetActive(true);
     }
     public void CloseCharge()
     {
+        ui_set1.SetActive(false);
         ui_charge.SetActive(false);
-        ui_set2.SetActive(true);
+        btn_charge.SetActive(true);
+        
+        if(thisState == State.pause)
+        {
+            ui_set2.SetActive(true);
+            ui_clear.SetActive(false);
+            ui_failed.SetActive(false);
+        }
+        else if(thisState == State.failed)
+        {
+            ui_set2.SetActive(false);
+            ui_clear.SetActive(false);
+            ui_failed.SetActive(true);
+        }
+        else if(thisState == State.clear)
+        {
+            ui_set2.SetActive(false);
+            ui_clear.SetActive(true);
+            ui_failed.SetActive(false);
+        }
     }
     public void Click_ChargeBtn()
     {
@@ -115,21 +180,17 @@ public class UIManager : MonoBehaviour
     }
     public void FinishAd()
     {
-        foreach(ReplayBtn btn in list_replaybtn)
-        {
-            btn.SettingHeart();
-        }
+        txt_playtime.text = DataManager.instance.restPlay.ToString();
         CloseCharge();
     }
 
     public void ActiveResult(GameManager.Result result)
     {
         activeMenu = true;
-
+        btn_charge.SetActive(true);
         if (DataManager.instance.isHaptic)
         {
             Handheld.Vibrate();
-            Debug.Log("UIManager:ActiveResult - 진동");
         }
 
         if (result == GameManager.Result.clear)
@@ -137,6 +198,7 @@ public class UIManager : MonoBehaviour
             audioSource.PlayOneShot(clip_completed);
             ui_set1.SetActive(false);
             ui_clear.SetActive(true);
+            thisState = State.clear;
         }
         else
         {
@@ -149,6 +211,7 @@ public class UIManager : MonoBehaviour
                 txt_failed_reason.text = "There are blocks left!";
 
             ui_failed.SetActive(true);
+            thisState = State.failed;
         }
     }
 }

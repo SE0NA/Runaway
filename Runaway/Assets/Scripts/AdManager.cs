@@ -11,8 +11,7 @@ public class AdManager : MonoBehaviour
     private string _adUnitID = "ca-app-pub-3940256099942544/5224354917"; // 테스트 리워드 
     private RewardedAd rewardedAd;
 
-    [Header("GameObject")]
-    [SerializeField] GameObject obj_toast;
+
 
     public void Start()
     {   if (instance == null)
@@ -86,21 +85,8 @@ public class AdManager : MonoBehaviour
                 }
 
                 // 광고 미리 로드
-                RegisterReloadHandler(rewardedAd);
+                LoadAd();
             });
         }
-    }
-
-    private void RegisterReloadHandler(RewardedAd ad)
-    {
-        ad.OnAdFullScreenContentClosed += () =>
-        {
-            
-            LoadAd();
-        };
-        ad.OnAdFullScreenContentFailed += (AdError error) =>
-        {
-            LoadAd();
-        };
     }
 }

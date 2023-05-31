@@ -68,7 +68,6 @@ public class DataManager : MonoBehaviour
         if (leveldata.version != Application.version)
         {
             leveldata = UpdateLevelData();
-            SaveLevelData();
         }
     }
 
@@ -95,7 +94,7 @@ public class DataManager : MonoBehaviour
 
         foreach(Level l in leveldata.levellist)
         {
-            newLD.levellist[l.level - 1] = l;
+            newLD.levellist[l.level - 1].clear = l.clear;
         }
 
         Debug.Log(levelDataFileName + " 파일 업데이트 완료! >> newSD.length: " + newLD.levellist.Length);
@@ -105,6 +104,8 @@ public class DataManager : MonoBehaviour
         {
             UpdateStageData(stageDataFileName + l.level.ToString());
         }
+
+        SaveLevelData();
 
         return newLD;
     }
@@ -154,11 +155,14 @@ public class DataManager : MonoBehaviour
 
             foreach (Stage s in restSD.stagelist)
             {
-                newSD.stagelist[s.stageNo - 1] = s;
+                newSD.stagelist[s.stageNo - 1].clear = s.clear;
             }
+
 
             Debug.Log(fileName + " 파일 업데이트 완료! >>  스테이지 수: " + newSD.stagelist.Length);
         }
+        stagedata = newSD;
+        SaveStageData();
     }
 
     public void SaveStageData()

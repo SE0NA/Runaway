@@ -4,19 +4,19 @@
         {
             "level": 1,
             "title": "turtle",
-            "total": 4,
+            "total": 21,
             "clear": 0
         },
         {
             "level": 2,
-            "title": "cat",
-            "total": 4,
+            "title": "fox",
+            "total": 21,
             "clear": 0
         },
         {
             "level": 3,
             "title": "eagle",
-            "total": 4,
+            "total": 21,
             "clear": 0
         }
     ]
