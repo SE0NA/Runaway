@@ -11,12 +11,16 @@ public class HomeListManager : MonoBehaviour
     [SerializeField] GameObject obj_panel_for_list;
 
     [SerializeField] TextMeshProUGUI txt_level;
+    [SerializeField] RectTransform scrollContent;
 
 
 
     public void SettingStageList()
     {
         txt_level.text = DataManager.instance.leveldata.levellist[DataManager.instance.selectedLevel - 1].title;
+
+        float x = scrollContent.anchoredPosition.x;
+        scrollContent.anchoredPosition = new Vector2(x, 0);
 
         // 기존 리스트 삭제
         foreach (Transform child in obj_panel_for_list.transform)

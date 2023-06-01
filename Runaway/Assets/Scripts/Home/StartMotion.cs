@@ -13,6 +13,7 @@ public class StartMotion : MonoBehaviour
     public List<Button> btn_start;
     public TextMeshProUGUI txt_start;
     public Image img_set;
+    public TextMeshProUGUI txt_copyright;
 
     [Header("Camera")]
     public Vector3 c_origin;
@@ -81,6 +82,15 @@ public class StartMotion : MonoBehaviour
 
         btn_start[0].interactable = true;
         btn_start[1].interactable = true;
+
+        fadeCount = 0f;
+        while(fadeCount < 1.0f)
+        {
+            fadeCount += 0.05f;
+            yield return new WaitForSeconds(0.01f);
+
+            txt_copyright.color = new Color(txt_copyright.color.r, txt_copyright.color.g, txt_copyright.color.b, fadeCount);
+        }
 
         // 애니메이션 종료 후 해당 오브젝트 삭제
         Destroy(gameObject);
