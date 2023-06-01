@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System;
-using System.Globalization;
-using Unity.VisualScripting;
-using UnityEditor;
 
 public class DataManager : MonoBehaviour
 {

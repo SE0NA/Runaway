@@ -7,14 +7,24 @@ using UnityEngine.SceneManagement;
 
 public class AdManager : MonoBehaviour
 {
+    [Header("Test")]
+    public bool test_mode = false;
+
     private static AdManager instance = null;
-    private string _adUnitID = "ca-app-pub-3940256099942544/5224354917"; // 테스트 리워드 
+    private string _adUnitID = "ca-app-pub-4969644002755220/1434492590"; // 실제 리워드 
     private RewardedAd rewardedAd;
 
 
 
     public void Start()
-    {   if (instance == null)
+    {  
+        if(test_mode == true)
+        {
+            _adUnitID = "ca-app-pub-3940256099942544/5224354917";
+            Debug.Log("testMode");
+        }
+
+        if (instance == null)
         {
             // Initialize the Google Mobile Ads SDK
             MobileAds.Initialize((InitializationStatus initStatus) =>
